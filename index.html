@@ -30,11 +30,19 @@
             border: 2px silver double;
             display: inline-block;
             background: white;
+            z-index: 9999;
+
+            border-collapse: collapse;
         }
         td:nth-child(1) { width: 30px; }
-        td:nth-child(2) { width: 75px; }
-        td:nth-child(3) { width: 90px; }
-        td.copy { width: 50px; }
+        td:nth-child(2) { width: 63px; text-align: left; padding-left: 5px}
+        td:nth-child(3) { width: 45px; }
+        td.copy {
+            width: 55px;
+            opacity: .9; /* corrige problema de hover e z-index do zoomedChar */
+            color: #222;
+        }
+        td.copy:hover {color: black; text-shadow: 1px 1px 2px white;}
 
         tbody tr:nth-child(odd) { background-color: #ffd; }
         /*tbody tr { border: 1px solid transparent }*/
@@ -44,7 +52,7 @@
             display: inline-block;
             width: 90%;
             font-size: 70px;
-            height: 82px;
+            height: 85px;
             text-align: center;
             vertical-align: middle;
             text-shadow: 2px 2px 4px olive;
@@ -53,6 +61,36 @@
 
         .copy,
         .letra { cursor: pointer; }
+
+        #zoomedChar {
+            /*display: none;*/
+            position: fixed;
+            z-index: 0;
+            text-align: center;
+            border: 1px solid black;
+            background: rgba(0,0,0,.4);
+            margin: 0 auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            transition: 0.7s;
+            /*transition: opacity 0.3s;*/
+
+            opacity: 0;
+            font-size: 0;
+            width: 0;
+            height: 0;
+
+            text-shadow: 2px 2px 5px lime;
+            vertical-align: top;
+        }
+        #zoomedChar.visible {
+            font-size: 530px;
+            width: 90%;
+            opacity: 1;
+            line-height: 100%;
+            height: 100%;
+        }
 
         pre {
             text-align: left
@@ -63,7 +101,7 @@
 
         [data-egoista='true'] {
             color:red;
-            opacity: .1;
+            opacity: .1 !important;
         }
 
 
@@ -87,10 +125,107 @@
             /*line-break: anywhere;*/
             white-space: break-spaces;
         }
+
+        .ta-l {
+            text-align: left;
+            background: white;
+            width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .text-box {
+            margin-bottom: 50px;
+        }
     </style>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="jquery.min.js"></script>
+
+    <script>
+        $(document).on('click', '.copy', function(e) {
+            var text = $(this).text();
+            text = text.replaceAll('ـ', '');
+
+            $("#copy").show().val( $("#copy").val() +''+ text );
+            // $("#copy").show().val(text)[0].select();
+
+            var transcription = $(this).data('character');
+            transcription = transcription.replaceAll('ـ', '');
+
+            $("#transcription").val( $("#transcription").val() +''+ transcription );
+        });
+
+        $(document).on('mouseenter', '.copy', function(e) {
+            var text = $(this).text();
+            $("#zoomedChar").text(text);
+            $("#zoomedChar").addClass("visible");
+        });
+
+        $(document).on('mouseleave', '.copy', function(e) {
+            $("#zoomedChar").removeClass("visible");
+        });
+
+        $(document).on('click', '.letra', function(e) {
+            let som = $(this).data('audio');
+            // audios['BGM'].volume = .2;
+            // audios['BGM'].loop = true;
+            // audios['zaa_a'].cloneNode(true).play();
+            audios[som].play();
+            return false;
+        });
+
+        $(document).on('click', '#reset', function(e) {
+            $("#copy").val('');
+            $("#transcription").val('');
+        });
+
+        $(document).on('click', '#copyText', function(e) {
+            $("#copy").select();
+            document.execCommand("copy");
+            $(".tooltiptext").text('Copiado!');
+            $(".tooltiptext").addClass('visible');
+            setTimeout(function(){
+                $(".tooltiptext").removeClass('visible');
+            }, 3000);
+
+        });
+
+        /* Fonte: https://lang_src.s3.amazonaws.com/yaa_a.mp3 */
+        var audios = [];
+        audios['alif_a']  = new Audio('audio/alif_a.mp3');
+        audios['ayn_a']   = new Audio('audio/ayn_a.mp3');
+        audios['baa_a']   = new Audio('audio/baa_a.mp3');
+        audios['daad_a']  = new Audio('audio/daad_a.mp3');
+        audios['daal_a']  = new Audio('audio/daal_a.mp3');
+        audios['dhaa_a']  = new Audio('audio/dhaa_a.mp3');
+        audios['dhaal_a'] = new Audio('audio/dhaal_a.mp3');
+        audios['faa_a']   = new Audio('audio/faa_a.mp3');
+        audios['ghayn_a'] = new Audio('audio/ghayn_a.mp3');
+        audios['Haa_a1']  = new Audio('audio/Haa_a1.mp3');
+        audios['haa_a2']  = new Audio('audio/haa_a2.mp3');
+        audios['jiim_a']  = new Audio('audio/jiim_a.mp3');
+        audios['kaaf_a']  = new Audio('audio/kaaf_a.mp3');
+        audios['khaa_a']  = new Audio('audio/khaa_a.mp3');
+        audios['laam_a']  = new Audio('audio/laam_a.mp3');
+        audios['miim_a']  = new Audio('audio/miim_a.mp3');
+        audios['nuun_a']  = new Audio('audio/nuun_a.mp3');
+        audios['qaaf_a']  = new Audio('audio/qaaf_a.mp3');
+        audios['raa_a']   = new Audio('audio/raa_a.mp3');
+        audios['saad_a']  = new Audio('audio/saad_a.mp3');
+        audios['shiin_a'] = new Audio('audio/shiin_a.mp3');
+        audios['siin_a']  = new Audio('audio/siin_a.mp3');
+        audios['taa_a']   = new Audio('audio/taa_a.mp3');
+        audios['Taa2_a']  = new Audio('audio/Taa2_a.mp3');
+        audios['thaa_a']  = new Audio('audio/thaa_a.mp3');
+        audios['waaw_a']  = new Audio('audio/waaw_a.mp3');
+        audios['yaa_a']   = new Audio('audio/yaa_a.mp3');
+        audios['zaa_a']   = new Audio('audio/zaa_a.mp3');
+    </script>
 </head>
 
 <body>
+    <span id="zoomedChar"></span>
+
 	<table>
 		<thead>
 			<tr>
@@ -264,7 +399,7 @@
                 <td class="copy" data-character="a">ا</td>
                 <td class="copy" data-character="a">ـا</td>
                 <td class="copy" data-character="a" data-egoista="true">ـا</td>
-                <td class="copy" data-character="a">ا</td>
+                <td class="copy" data-character="a" data-egoista="true">ا</td>
             </tr>
             <tr>
                 <td class="portugues">2</td>
@@ -395,6 +530,11 @@
         </tbody>
     </table>
 
+
+    <div class="tooltip">
+        <span class="tooltiptext">Tooltip text</span>
+    </div>
+
     <textarea id="copy"></textarea>
     <input id="transcription">
 
@@ -404,121 +544,20 @@
     </p>
 
 
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="jquery.min.js"></script>
-
-    <script>
-        $(document).on('click', '.copy', function(e) {
-            var text = $(this).text();
-            text = text.replaceAll('ـ', '');
-
-            $("#copy").show().val( $("#copy").val() +''+ text );
-            // $("#copy").show().val(text)[0].select();
-
-            // $("#copy").hide();
-            // alert("Copied the form: " + text);
 
 
 
-            var transcription = $(this).data('character');
-            transcription = transcription.replaceAll('ـ', '');
-
-            $("#transcription").val( $("#transcription").val() +''+ transcription );
-
-
-            // return false;
-        });
-
-        $(document).on('click', '.letra', function(e) {
-            let som = $(this).data('audio');
-            audios[som].play();
-            return false;
-        });
-
-        $(document).on('click', '#reset', function(e) {
-            $("#copy").val('');
-            $("#transcription").val('');
-        });
-
-        $(document).on('click', '#copyText', function(e) {
-            $("#copy").select();
-            document.execCommand("copy");
-            $(".tooltiptext").addClass('visible');
-            // alert("tooltiptext");
-        });
-
-
-
-
-        /* Fonte: https://lang_src.s3.amazonaws.com/yaa_a.mp3 */
-        var audios = [];
-        audios['alif_a']  = new Audio('audio/alif_a.mp3');
-        audios['ayn_a']   = new Audio('audio/ayn_a.mp3');
-        audios['baa_a']   = new Audio('audio/baa_a.mp3');
-        audios['daad_a']  = new Audio('audio/daad_a.mp3');
-        audios['daal_a']  = new Audio('audio/daal_a.mp3');
-        audios['dhaa_a']  = new Audio('audio/dhaa_a.mp3');
-        audios['dhaal_a'] = new Audio('audio/dhaal_a.mp3');
-        audios['faa_a']   = new Audio('audio/faa_a.mp3');
-        audios['ghayn_a'] = new Audio('audio/ghayn_a.mp3');
-        audios['Haa_a1']  = new Audio('audio/Haa_a1.mp3');
-        audios['haa_a2']  = new Audio('audio/haa_a2.mp3');
-        audios['jiim_a']  = new Audio('audio/jiim_a.mp3');
-        audios['kaaf_a']  = new Audio('audio/kaaf_a.mp3');
-        audios['khaa_a']  = new Audio('audio/khaa_a.mp3');
-        audios['laam_a']  = new Audio('audio/laam_a.mp3');
-        audios['miim_a']  = new Audio('audio/miim_a.mp3');
-        audios['nuun_a']  = new Audio('audio/nuun_a.mp3');
-        audios['qaaf_a']  = new Audio('audio/qaaf_a.mp3');
-        audios['raa_a']   = new Audio('audio/raa_a.mp3');
-        audios['saad_a']  = new Audio('audio/saad_a.mp3');
-        audios['shiin_a'] = new Audio('audio/shiin_a.mp3');
-        audios['siin_a']  = new Audio('audio/siin_a.mp3');
-        audios['taa_a']   = new Audio('audio/taa_a.mp3');
-        audios['Taa2_a']  = new Audio('audio/Taa2_a.mp3');
-        audios['thaa_a']  = new Audio('audio/thaa_a.mp3');
-        audios['waaw_a']  = new Audio('audio/waaw_a.mp3');
-        audios['yaa_a']   = new Audio('audio/yaa_a.mp3');
-        audios['zaa_a']   = new Audio('audio/zaa_a.mp3');
-
-        // audios['zaa_a'].cloneNode(true).play();
-        // audios['BGM'].volume = .2;
-        // audios['BGM'].loop = true;
-    </script>
-
-
-
-
-    <!-- <span class="tooltiptext" id="myTooltip">Copy to clipboard</span> -->
-
-    <div class="tooltip">Hover over me
-      <span class="tooltiptext">Tooltip text</span>
-    </div>
-
-
-    <script type="text/javascript">
-        function myFunction ()
-        {
-          var tooltip = document.getElementById("myTooltip");
-          tooltip.innerHTML = "Copied:   copyText.value";
-        }
-
-        function outFunc ()
-        {
-          var tooltip = document.getElementById("myTooltip");
-          tooltip.innerHTML = "Copy to clipboard";
-        }
-    </script>
 
 
     <style>
     .tooltip {
       position: relative;
-      display: inline-block;
+      /*display: inline-block;*/
+      margin: 0 auto;
     }
 
     .tooltip .tooltiptext {
-      visibility: hidden;
+      /*visibility: hidden;*/
       width: 140px;
       background-color: #555;
       color: #fff;
@@ -527,7 +566,7 @@
       padding: 5px;
       position: absolute;
       z-index: 1;
-      bottom: 150%;
+      bottom: 6px;
       left: 50%;
       margin-left: -75px;
       opacity: 0;
@@ -545,146 +584,112 @@
       border-color: #555 transparent transparent transparent;
     }
 
-    .tooltip .tooltiptext.visible,
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
+    .tooltip .tooltiptext.visible {
+      /*visibility: visible;*/
       opacity: 1;
     }
     </style>
 
+<div class="ta-l">
 
+    <h2>Gramática</h2>
+    <div class="text-box">
+        <p>O alfabeto árabe contém 28 letras básicas.</p>
+        <p>Com uma variedade de carecteres especiais e acentos vogais.</p>
+        <p>As letras árabes não têm maiúsculas e minúsculas como no alfabeto ocidental.</p>
+        <p>O idioma árabe é lido e escrito da direita para esquerda.</p>
+        <p>É escrito em estilo cursivo.</p>
+        <p>As letras são conectadas umas as outras nas palavras.</p>
+        <p>Cada letra possui uma forma diferente dependendo de sua posição em uma palavra.</p>
+        <p>As quatro posições de uma letra em uma palavra são: isolada, inicial, intermediária and final.</p>
+        <p>Seis letras (ا (alif), د (daal), ذ (dhaal), ر (raa), ز (zayn / zaa), e و (waaw)) não têm formas intermediárias.</p>
+        <p>Elas são chamadas de <i>letras egoístas</i> e utilizam apenas as formas isolada e final dependendo da sua posição.</p>
 
+        <p>Não existem as consoantes P e V.</p>
+        <p>Não existem as vogais E e O.</p>
+        <p>Existem apenas 3 vogais A, I e U.</p>
+        <p>As vogais longas são representadas por consoantes fracas ( ا (alif), و (waaw), e ي (yaa)).</p>
+        <p>O sinais diacríticos (acentos gráficos) facultativos, chamados de harakat, fornecem os sons das vogais curtas e orientam a interpretação da pronúncia.</p>
+    </div>
 
-<pre>
-    wikipedia
-    O árabe (العربية, transl. al-ʻarabiyyah ) é uma língua semita central, parente próximo do hebraico e das línguas neo-aramaicas.
+    <h2>História</h2>
+    <div class="text-box">
+        <p>O árabe (العربية, transl. al-ʻarabiyyah ) é uma língua semita central, parente próximo do hebraico e das línguas neo-aramaicas.</p>
+        <p>Pertence a família das línguas semíticas, que por sua vez, compõem o tronco linguístico das afro-asiáticas (ou camito-semitas).</p>
+        <p>A língua árabe é falada por mais de 280 milhões de pessoas como língua materna no Oriente Médio, Sudoeste Asiático e Norte da África.</p>
+        <p>Falada em 58 países, só é menos difundida no mundo do que o inglês.</p>
+        <p>É idioma oficial de 26 países, número atrás apenas do inglês e francês, é a língua litúrgica do islamismo, por ser o idioma no qual o Corão, o livro sagrado islâmico, foi escrito.</p>
+    </div>
 
-    Pertence a família das línguas semíticas, que por sua vez, compõem o tronco linguístico das afro-asiáticas (ou camito-semitas).
-
-    A língua árabe tem mais falantes do que qualquer outro idioma na família linguística semita, e é falada por mais de 280 milhões de pessoas como língua materna,[1] no Oriente Médio, Sudoeste Asiático e Norte da África.
-
-    É idioma oficial de 26 países, número atrás apenas do inglês e francês,[4] e a língua litúrgica do islamismo, por ser o idioma no qual o Corão, o livro sagrado islâmico, foi escrito.
-
-    Falada em 58 países, só é menos difundida no mundo do que o inglês (106).[3]
-
-    O alfabeto árabe contém 28 letras básicas
-    com uma variedade de carecteres especiais e acentos vogais.
-
-    As letras árabes não têm maiúsculas e minúsculas como no alfabeto latino.
-
-    é lido da direita para esquerda.
-
-    É escrito no estilo cursivo.
-
-    permitiu o surgimento das ligaduras, duas palavras separadas escritas de forma conjunta, e outras letras modificadas.
-
-    cada letra possui uma forma diferente dependendo da sua posição em uma palavra.
-
-    As quatro posições de uma letra em uma palavra são: isolada, inicial, intermediária and final.
-
-    Com exceção das ا (alif), د (daal), ذ (dhaal), ر (raa), ز (zayn / zaa), e و (waaw) que são chamadas letras egoístas pois não se conectam com nenhuma outra letra.
-    Essas letras utilizam apenas as formas isolada e final dependendo da sua posição.
-
-    Seis letras (ا (alif), د (daal), ذ (dhaal), ر (raa), ز (zayn / zaa), e و (waaw)) não têm formas intermediárias.
-    Elas são chamadas de letras egoístas e usam tanto a forma final como a isolada dependendo da sua posição.
-
-
-    Existem apenas 3 vogais A,I e U
-    não existem as consoantes P e V
-
-    Vogais longas são representadas por consoantes fracas ( ا (alif), و (waaw), e ي (yaa)),
-
-    e sinais diacríticos (acentos gráficos) facultativos, chamados de harakat, fornecem os sons das vogais curtas e ajudam na interpretação da pronúncia.
-</pre>
-
-<ul>
-    <li>Argélia</li>
-    <li>Arábia Saudita</li>
-    <li>Bahrain</li>
-    <li>Catar</li>
-    <li>Chad</li>
-    <li>Comores</li>
-    <li>Djibouti</li>
-    <li>Egito</li>
-    <li>Emirados Árabes Unidos</li>
-    <li>Eritreia</li>
-    <li>Iraque</li>
-    <li>Israel</li>
-    <li>Iêmen</li>
-    <li>Jordânia</li>
-    <li>Kuwait</li>
-    <li>Líbano</li>
-    <li>Líbia</li>
-    <li>Marrocos</li>
-    <li>Mauritânia</li>
-    <li>Omã</li>
-    <li>Palestina</li>
-    <li>Qatar</li>
-    <li>Somalilândia</li>
-    <li>Somália</li>
-    <li>Sudão</li>
-    <li>Síria</li>
-    <li>Tunísia</li>
-</ul>
-
+    <h2>Países falantes de árabe</h2>
+    <ul>
+        <li>Argélia</li>
+        <li>Arábia Saudita</li>
+        <li>Bahrain</li>
+        <li>Catar</li>
+        <li>Chad</li>
+        <li>Comores</li>
+        <li>Djibouti</li>
+        <li>Egito</li>
+        <li>Emirados Árabes Unidos</li>
+        <li>Eritreia</li>
+        <li>Iraque</li>
+        <li>Israel</li>
+        <li>Iêmen</li>
+        <li>Jordânia</li>
+        <li>Kuwait</li>
+        <li>Líbano</li>
+        <li>Líbia</li>
+        <li>Marrocos</li>
+        <li>Mauritânia</li>
+        <li>Omã</li>
+        <li>Palestina</li>
+        <li>Qatar</li>
+        <li>Somalilândia</li>
+        <li>Somália</li>
+        <li>Sudão</li>
+        <li>Síria</li>
+        <li>Tunísia</li>
+    </ul>
+</div>
 </body></html>
 
+<div>
+    <table border="1" cellspacing="0" cellpadding="4" class="wikitable">
+    <caption><b>Caracteres especiais árabes:</b></caption>
 
 
+    <tr>
+        <td>ّ</td>
+        <td><i>xadda</i>; marca a geminação de uma consoante; kasra (ver abaixo) faz a transição entre shadda e a consoante geminada, quando presente; não é usada de forma consistente nos textos modernos;
+        </td>
+    </tr>
 
+    <tr>
+        <th colspan="2"><i>As vogais breves são apenas indicadas no Corão e nos livros de instrução de crianças.</i>
+        </th>
+    </tr>
 
+    <tr>
+        <td>ْ</td>
+        <td><i>suku:n</i>; marca uma consoante sem vogal a seguir
+        </td>
+    </tr>
 
+    <tr>
+        <td>َ</td>
+        <td><i>fatX\a</i>; /a/ breve
+        </td>
+    </tr>
 
+    <tr>
+        <td>ِ</td>
+        <td><i>kasra</i>; /i/ breve
+        </td>
+    </tr>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table border="1" cellspacing="0" cellpadding="4" class="wikitable">
-<caption><b>Caracteres especiais árabes:</b></caption>
-
-
-<tr>
-    <td>ّ</td>
-    <td><i>xadda</i>; marca a geminação de uma consoante; kasra (ver abaixo) faz a transição entre shadda e a consoante geminada, quando presente; não é usada de forma consistente nos textos modernos;
-    </td>
-</tr>
-
-<tr>
-    <th colspan="2"><i>As vogais breves são apenas indicadas no Corão e nos livros de instrução de crianças.</i>
-    </th>
-</tr>
-
-<tr>
-    <td>ْ</td>
-    <td><i>suku:n</i>; marca uma consoante sem vogal a seguir
-    </td>
-</tr>
-
-<tr>
-    <td>َ</td>
-    <td><i>fatX\a</i>; /a/ breve
-    </td>
-</tr>
-
-<tr>
-    <td>ِ</td>
-    <td><i>kasra</i>; /i/ breve
-    </td>
-</tr>
-
-<tr>
-    <td>ُ</td>
-    <td><i>d'am:a</i>; /u/ breve</td>
-</tr>
+    <tr>
+        <td>ُ</td>
+        <td><i>d'am:a</i>; /u/ breve</td>
+    </tr>
+</div>

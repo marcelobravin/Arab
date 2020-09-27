@@ -14,7 +14,7 @@
         }
         td {
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
             width: 80px;
         }
         td.portugues {
@@ -48,11 +48,14 @@
         /*tbody tr { border: 1px solid transparent }*/
         tbody tr:hover { /*border: 1px solid black;*/ background: #dfd}
 
+        #transcription {
+            margin: 10px 0;
+        }
         textarea {
             display: inline-block;
             width: 90%;
             font-size: 70px;
-            height: 85px;
+            height: 90px;
             text-align: center;
             vertical-align: middle;
             text-shadow: 2px 2px 4px olive;
@@ -112,7 +115,7 @@
             cursor: pointer;
             padding: 10px 0;
             width: 90px;
-            margin: 20px 10px 0px;
+            margin: 0 10px 20px;
         }
         #copyText { background: darkblue; }
         #copyText:hover { background: blue; }
@@ -135,8 +138,66 @@
         }
 
         .text-box {
-            margin-bottom: 50px;
+            margin-bottom: 65px;
         }
+
+        .tooltip {
+          position: relative;
+          /*display: inline-block;*/
+          margin: 0 auto;
+        }
+
+        .tooltip .tooltiptext {
+          /*visibility: hidden;*/
+          width: 140px;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: absolute;
+          z-index: 1;
+          bottom: 6px;
+          left: 50%;
+          margin-left: -75px;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip .tooltiptext.visible {
+          /*visibility: visible;*/
+          opacity: 1;
+        }
+
+
+        .flag {
+            width: 70px;
+            height: 46px;
+            vertical-align: middle;
+         }
+
+         li {
+            margin: 20px 0;
+            list-style: decimal;
+            /*display: inline-block;*/
+            /*width: 300px;*/
+            /*float: right;*/
+         }
+
+         a {
+            text-decoration: none
+         }
     </style>
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script src="jquery.min.js"></script>
@@ -147,7 +208,6 @@
             text = text.replaceAll('ـ', '');
 
             $("#copy").show().val( $("#copy").val() +''+ text );
-            // $("#copy").show().val(text)[0].select();
 
             var transcription = $(this).data('character');
             transcription = transcription.replaceAll('ـ', '');
@@ -167,11 +227,7 @@
 
         $(document).on('click', '.letra', function(e) {
             let som = $(this).data('audio');
-            // audios['BGM'].volume = .2;
-            // audios['BGM'].loop = true;
-            // audios['zaa_a'].cloneNode(true).play();
             audios[som].play();
-            return false;
         });
 
         $(document).on('click', '#reset', function(e) {
@@ -535,60 +591,14 @@
         <span class="tooltiptext">Tooltip text</span>
     </div>
 
-    <textarea id="copy"></textarea>
     <input id="transcription">
+    <textarea id="copy"></textarea>
 
     <p>
         <button id="copyText">Copiar</button>
         <button id="reset">Limpar</button>
     </p>
 
-
-
-
-
-
-
-    <style>
-    .tooltip {
-      position: relative;
-      /*display: inline-block;*/
-      margin: 0 auto;
-    }
-
-    .tooltip .tooltiptext {
-      /*visibility: hidden;*/
-      width: 140px;
-      background-color: #555;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px;
-      position: absolute;
-      z-index: 1;
-      bottom: 6px;
-      left: 50%;
-      margin-left: -75px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .tooltip .tooltiptext::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: #555 transparent transparent transparent;
-    }
-
-    .tooltip .tooltiptext.visible {
-      /*visibility: visible;*/
-      opacity: 1;
-    }
-    </style>
 
 <div class="ta-l">
 
@@ -601,7 +611,7 @@
         <p>É escrito em estilo cursivo.</p>
         <p>As letras são conectadas umas as outras nas palavras.</p>
         <p>Cada letra possui uma forma diferente dependendo de sua posição em uma palavra.</p>
-        <p>As quatro posições de uma letra em uma palavra são: isolada, inicial, intermediária and final.</p>
+        <p>As quatro posições de uma letra em uma palavra são: isolada, inicial, intermediária e final.</p>
         <p>Seis letras (ا (alif), د (daal), ذ (dhaal), ر (raa), ز (zayn / zaa), e و (waaw)) não têm formas intermediárias.</p>
         <p>Elas são chamadas de <i>letras egoístas</i> e utilizam apenas as formas isolada e final dependendo da sua posição.</p>
 
@@ -614,153 +624,210 @@
 
     <h2>História</h2>
     <div class="text-box">
-        <p>O árabe (العربية, transl. al-ʻarabiyyah ) é uma língua semita central, parente próximo do hebraico e das línguas neo-aramaicas.</p>
+        <p>O árabe (العربية, transl. al-ʻarabiyyah ) é uma língua semita central, parente próxima do hebraico e das línguas neo-aramaicas.</p>
         <p>Pertence a família das línguas semíticas, que por sua vez, compõem o tronco linguístico das afro-asiáticas (ou camito-semitas).</p>
         <p>A língua árabe é falada por mais de 280 milhões de pessoas como língua materna no Oriente Médio, Sudoeste Asiático e Norte da África.</p>
         <p>Falada em 58 países, só é menos difundida no mundo do que o inglês.</p>
-        <p>É idioma oficial de 26 países, número atrás apenas do inglês e francês, é a língua litúrgica do islamismo, por ser o idioma no qual o Corão, o livro sagrado islâmico, foi escrito.</p>
+        <p>É idioma oficial de 26 países, número atrás apenas do inglês e francês.</p>
+        <p>É a língua litúrgica do islamismo, por ser o idioma no qual o Corão, o livro sagrado islâmico, foi escrito.</p>
     </div>
 
     <h2>Países falantes de árabe</h2>
     <ul>
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/saudi-arabia/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-saudi-arabia.html">Arábia Saudita</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-saudi-arabia.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/saudi-arabia/flag-wave-500.png">
+                Arábia Saudita
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/algeria/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-algeria.html">Argélia</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-algeria.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/algeria/flag-wave-500.png">
+                Argélia
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/bahrain/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-bahrain.html">Bahrein</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-bahrain.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/bahrain/flag-wave-500.png">
+                Bahrein
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/qatar/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-qatar.html">Catar</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-qatar.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/qatar/flag-wave-500.png">
+                Catar
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/chad/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-chad.html">Chade</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-chad.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/chad/flag-wave-500.png">
+                Chade
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/comoros/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-comoros.html">Comores</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-comoros.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/comoros/flag-wave-500.png">
+                Comores
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/djibouti/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-djibouti.html">Djibouti</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-djibouti.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/djibouti/flag-wave-500.png">
+                Djibouti
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/egypt/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-egypt.html">Egito</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-egypt.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/egypt/flag-wave-500.png">
+                Egito
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/united-arab-emirates/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-united-arab-emirates-the.html">Emirados Árabes Unidos</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-united-arab-emirates-the.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/united-arab-emirates/flag-wave-500.png">
+                Emirados Árabes Unidos
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/eritrea/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-eritrea.html">Eritreia</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-eritrea.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/eritrea/flag-wave-500.png">
+                Eritreia
+            </a>
         </li>
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/yemen/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-yemen.html">Iêmen</a>
-        </li>
-
-        <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/israel/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-israel.html">Israel</a>
-        </li>
-
-        <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/iraq/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-iraq.html">Iraque</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-yemen.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/yemen/flag-wave-500.png">
+                Iêmen
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/jordan/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-jordan.html">Jordânia</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-israel.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/israel/flag-wave-500.png">
+                Israel
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/kuwait/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-kuwait.html">Kuwait</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-iraq.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/iraq/flag-wave-500.png">
+                Iraque
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/lebanon/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-lebanon.html">Líbano</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-jordan.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/jordan/flag-wave-500.png">
+                Jordânia
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/libya/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-libya.html">Líbia</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-kuwait.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/kuwait/flag-wave-500.png">
+                Kuwait
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/morocco/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-morocco.html">Marrocos</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-lebanon.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/lebanon/flag-wave-500.png">
+                Líbano
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/mauritania/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-mauritania.html">Mauritânia</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-libya.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/libya/flag-wave-500.png">
+                Líbia
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/oman/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-oman.html">Omã</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-morocco.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/morocco/flag-wave-500.png">
+                Marrocos
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/palestine/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-palestine.html">Palestina</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-mauritania.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/mauritania/flag-wave-500.png">
+                Mauritânia
+            </a>
+        </li>
+
+        <li>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-oman.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/oman/flag-wave-500.png">
+                Omã
+            </a>
+        </li>
+
+        <li>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-palestine.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/palestine/flag-wave-500.png">
+                Palestina
+            </a>
         </li>
 
         <li>
             <!-- =========================================================== -->
             <!-- <img class="flag" src="https://cdn.countryflags.com/thumbs/saharawi-arab-democratic-republic/flag-wave-500.png"> -->
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg/188px-Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg.png">
-            <a target="_blank" href="https://pt.wikipedia.org/wiki/Saara_Ocidental">Saara Ocidental</a>
-            <!-- <a target="_blank" href="https://www.countryflags.com/en/flag-of-saharawi-arab-democratic-republic.html">Saara Ocidental</a> -->
+            <a target="_blank" href="https://pt.wikipedia.org/wiki/Saara_Ocidental">
+                <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg/188px-Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg.png">
+                SaaraOcidental
+            <!-- <a target="_blank" href="https://www.countryflags.com/en/flag-of-saharawi-arab-democratic-republic.html">Saara Ocidental
+            </a>
+            </a> -->
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/syria/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-syria.html">Síria</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-syria.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/syria/flag-wave-500.png">
+                Síria
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/somalia/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-somalia.html">Somália</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-somalia.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/somalia/flag-wave-500.png">
+                Somália
+            </a>
         </li>
 
         <li>
             <!-- =========================================================== -->
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Flag_of_Somaliland.svg/188px-Flag_of_Somaliland.svg.png">
-            <a target="_blank" href="https://pt.wikipedia.org/wiki/Somalil%C3%A2ndia">Somalilândia</a>
+            <a target="_blank" href="https://pt.wikipedia.org/wiki/Somalil%C3%A2ndia">
+                <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Flag_of_Somaliland.svg/188px-Flag_of_Somaliland.svg.png">
+                Somalilândia
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/sudan/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-sudan.html">Sudão</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-sudan.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/sudan/flag-wave-500.png">
+                Sudão
+            </a>
         </li>
 
         <li>
-            <img class="flag" src="https://cdn.countryflags.com/thumbs/tunisia/flag-wave-500.png">
-            <a target="_blank" href="https://www.countryflags.com/en/flag-of-tunisia.html">Tunísia</a>
+            <a target="_blank" href="https://www.countryflags.com/en/flag-of-tunisia.html">
+                <img class="flag" src="https://cdn.countryflags.com/thumbs/tunisia/flag-wave-500.png">
+                Tunísia
+            </a>
         </li>
     </ul>
+    <br>
 </div>
 <br>
 <br>
@@ -930,25 +997,6 @@
                                         </tr>
                                       </tbody>
                                     </table>
-
-
-
-<style type="text/css">
-    .flag {
-        width: 70px;
-        height: 46px;
-        vertical-align: middle;
-     }
-
-     li {
-        margin: 20px 0;
-        list-style: none;
-     }
-     a {
-        text-decoration: none
-     }
-</style>
-
 
 </body></html>
 <!--

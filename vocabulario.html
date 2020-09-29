@@ -50,6 +50,17 @@
         #spaceBar {
             width: 500px;
         }
+
+        #reset {
+            color: white;
+            cursor: pointer;
+            padding: 10px 0;
+            width: 90px;
+            /*margin: 0 10px 20px;*/
+            vertical-align: top;
+        }
+        #reset { background: darkred; }
+        #reset:hover { background: red; }
     </style>
     <script src="jquery.min.js"></script>
     <script>
@@ -204,7 +215,7 @@
                 validar();
             });
 
-            $("body").on('click', 'button', function(){
+            $("body").on('click', '#pular', function(){
                 if ($("#recorde").text() < $("#acertos").text()) {
                     $("#recorde").text( $("#acertos").text() )
                 }
@@ -217,6 +228,10 @@
                 $("textarea").val( $("textarea").val() + $(this).text() );
                 validar();
             });
+
+            $(document).on('click', '#reset', function(e) {
+                $("textarea").val('');
+            });
         });
 
         let n = 0;
@@ -225,7 +240,7 @@
         {
             n = getRandomInt(0, frases.length);
             let r = getRandomInt(0, 2);
-            console.log(r);
+            // console.log(r);
             if ( r == 1 ) {
                 responderEm = 'AR';
                 $("#tecladoVirtual").fadeIn();
@@ -260,6 +275,7 @@
         {
             if ( verificarAcerto() ) {
                 $("#acertos").text( Number($("#acertos").text()) +1 );
+                console.log("emitiu som acerto!");
                 audios['acerto'].play();
 
                 setTimeout(function(){
@@ -271,12 +287,19 @@
     </script>
 </head>
 <body>
-    <button>Pular</button>
+    <p>
+        <a href="index.html">Voltar para home</a>
+    </p>
+
+    <button id="pular">Pular</button>
     <div id="recorde">0</div>
     <div id="acertos">0</div>
     <div id="conteudo"></div>
     <div id="dica"></div>
+    <br>
     <textarea></textarea>
+    <button id="reset">Limpar</button>
+    <br>
 
     <div id="tecladoVirtual">
         <i>ا</i>
@@ -315,9 +338,19 @@
 
     </div>
 <br>
+    <label for="queroDigitar">queroDigitar: </label>
     <select name="queroDigitar" id="queroDigitar">
+      <option value="">Ambos</option>
       <option value="PT">Português</option>
       <option value="AR">Árabe</option>
-      <option value="">Ambos</option>
+    </select>
+
+    <label for="filtrar">filtrar: </label>
+    <select name="filtrar" id="filtrar">
+      <option value="PT">Todos</option>
+      <option value="PT">Pronomes</option>
+      <option value="AR">Substantivos</option>
+      <option value="">Expressões</option>
+      <option value="">Numerais</option>
     </select>
 </body></html>

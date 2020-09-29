@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Vocabulário Alfabeto Árabe</title>
+    <!-- tempo -->
+    <link rel="shortcut icon" href="iconfinder_Arab League_15797.png" />
+    <style type="text/css">
+        body {
+            /*background-color: maroon;*/
+            background-color: cornflowerblue;
+            color: white;
+            text-align: center;
+        }
+        #conteudo {
+            text-shadow: -7px 7px 4px black;
+            font-size: 160px;
+        }
+
+
+
+        i {
+            display: inline-block;
+            width: 50px;
+            border: 1px solid #aaa;
+            font-size: 40px;
+            font-style: normal;
+            text-shadow: 1px 1px 1px black;
+            color: #aaa;
+            margin: 4px 0px;
+            height: 50px;
+            cursor: pointer;
+        }
+        i:hover {
+            border-color: white;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #spaceBar {
+            width: 500px;
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+    <script>
+        var audios = [];
+        audios['acerto'] = new Audio('audio/Vibrant_Game_Shutter_Alert_1_Short_Quick.mp3');
+        audios['erro']   = new Audio('audio/Error or failed.mp3');
+
+        var frases = [
+            // {
+            //     frase: "oi",
+            //     fraseA: "مرحبا",
+            //     fraseT: "marḥaba"
+            // }, {
+            //     frase: "bom dia",
+            //     fraseA: "صباح الخير",
+            //     fraseT: "ṣabāha l-ḫair"
+            // }, {
+            //     frase: "boa tarde",
+            //     fraseA: "يوم سعيد",
+            //     fraseT: "yawmun sa ʾīd"
+            // }, {
+            //     frase: "tchau",
+            //     fraseA: "مع السلامة",
+            //     fraseT: "maʿa s-salamah"
+            // }, {
+            //     frase: "até logo",
+            //     fraseA: "إلى اللقاء",
+            //     fraseT: "ʾilā l-lāʾ"
+            // }, {
+            //     frase: "sim",
+            //     fraseA: "نعم",
+            //     fraseT: "naʿam"
+            // }, {
+            //     frase: "não",
+            //     fraseA: "لا",
+            //     fraseT: "lā"
+            // }, {
+            //     frase: "obrigado",
+            //     fraseA: "شكرا",
+            //     fraseT: "šukran"
+            // }, {
+            //     frase: "saúde",
+            //     fraseA: "في صحتك",
+            //     fraseT: "fi sihtik"
+            // }, {
+            //     frase: "desculpe me",
+            //     fraseA: "أنا آسف",
+            //     fraseT: "ʾana āsif"
+            // }
+
+            {   frase: "ali"                , fraseT: "hnak"                 , fraseA: "هناك" }
+            , { frase: "lá"                 , fraseT: "hnak"                 , fraseA: "هناك" }
+            , { frase: "antes"              , fraseT: "qabl"                 , fraseA: "قبل" }
+            , { frase: "aquele"             , fraseT: "dhlk"                 , fraseA: "ذلك" }
+            , { frase: "aqui"               , fraseT: "huna"                 , fraseA: "هنا" }
+            , { frase: "as"                 , fraseT: "fi"                   , fraseA: "في" }
+            , { frase: "atrás"              , fraseT: "khalf"                , fraseA: "خلف" }
+            , { frase: "até logo"           , fraseT: "'arak lahiqaan"       , fraseA: "أراك لاحقا" }
+            , { frase: "bem"                , fraseT: "hasan"                , fraseA: "حسن" }
+            , { frase: "boa noite"          , fraseT: "tusbih ealaa khayr"   , fraseA: "تصبح على خير" }
+            , { frase: "boa tarde"          , fraseT: "tab masayik"          , fraseA: "طاب مسائك" }
+            , { frase: "bom"                , fraseT: "hasan"                , fraseA: "حسن" }
+            , { frase: "bom dia"            , fraseT: "sabah alkhyr"         , fraseA: "صباح الخير" }
+            , { frase: "claro"              , fraseT: "bialtabe bikuli takid", fraseA: "بالطبع بكل تأكيد" }
+            , { frase: "com licença"        , fraseT: "eadhar"               , fraseA: "عذر" }
+            , { frase: "como vai?"          , fraseT: "kayf halk?"           , fraseA: "كيف حالك؟" }
+            , { frase: "como você se chama?", fraseT: "ma hu asmak?"         , fraseA: "ما هو اسمك؟" }
+            , { frase: "de"                 , fraseT: "fi"                   , fraseA: "في" }
+            , { frase: "dela"               , fraseT: "laha"                 , fraseA: "لها" }
+            , { frase: "delas"              , fraseT: "minhum"               , fraseA: "منهم" }
+            , { frase: "dele"               , fraseT: "lah"                  , fraseA: "له" }
+            , { frase: "deles"              , fraseT: "hum"                  , fraseA: "هم" }
+            , { frase: "demasiado"          , fraseT: "jiddaan"              , fraseA: "جدا" }
+            , { frase: "dentro"             , fraseT: "fi dakhil"            , fraseA: "في داخل" }
+            , { frase: "desculpe"           , fraseT: "efu"                  , fraseA: "عفوا" }
+            , { frase: "difícil"            , fraseT: "saeb"                 , fraseA: "صعب" }
+            , { frase: "e"                  , fraseT: "w"                    , fraseA: "و" }
+            , { frase: "ela"                , fraseT: "hi"                   , fraseA: "هي" }
+            , { frase: "elas"               , fraseT: "hum"                  , fraseA: "هم" }
+            , { frase: "ele"                , fraseT: "hu"                   , fraseA: "هو" }
+            , { frase: "eles"               , fraseT: "hum"                  , fraseA: "هم" }
+            , { frase: "em cima"            , fraseT: "ealaa"                , fraseA: "على" }
+            , { frase: "embaixo"            , fraseT: "'adnah"               , fraseA: "أدناه" }
+            , { frase: "esse"               , fraseT: "dhlk"                 , fraseA: "ذلك" }
+            , { frase: "este"               , fraseT: "hadha"                , fraseA: "هذا" }
+            , { frase: "eu"                 , fraseT: "'ana"                 , fraseA: "أنا" }
+            , { frase: "eu me chamo ..."    , fraseT: "aismi hu ..."         , fraseA: "اسمي هو ..." }
+            , { frase: "fora"               , fraseT: "kharij"               , fraseA: "خارج" }
+            , { frase: "fácil"              , fraseT: "sahl"                 , fraseA: "سهل" }
+            , { frase: "junto"              , fraseT: "sawianaan"            , fraseA: "سويا" }
+            , { frase: "lento"              , fraseT: "bati'"                , fraseA: "بطيء" }
+            , { frase: "devagar"            , fraseT: "bbt'"                 , fraseA: "ببطء" }
+            , { frase: "mal"                , fraseT: "sayiya"               , fraseA: "سيئة" }
+            , { frase: "mas"                , fraseT: "lkn"                  , fraseA: "لكن" }
+            , { frase: "meu"                , fraseT: "li"                   , fraseA: "لي" }
+            , { frase: "minha"              , fraseT: "li"                   , fraseA: "لي" }
+            , { frase: "muito"              , fraseT: "kthyr"                , fraseA: "كثير" }
+            , { frase: "demais"             , fraseT: "kthyr jiddaan"        , fraseA: "كثير جدا" }
+            , { frase: "muitos"             , fraseT: "kthyr"                , fraseA: "كثير" }
+            , { frase: "nosso"              , fraseT: "lana"                 , fraseA: "لنا" }
+            , { frase: "nossos"             , fraseT: "lana"                 , fraseA: "لنا" }
+            , { frase: "novo"               , fraseT: "jadid"                , fraseA: "جديد" }
+            , { frase: "não"                , fraseT: "la"                   , fraseA: "لا" }
+            , { frase: "nós"                , fraseT: "nahn"                 , fraseA: "نحن" }
+            , { frase: "o"                  , fraseT: "al"                   , fraseA: "ال" }
+            , { frase: "banheiro"           , fraseT: "hamam"                , fraseA: "حمام" }
+            , { frase: "obrigado"           , fraseT: "shukraan"             , fraseA: "شكرا" }
+            , { frase: "oi"                 , fraseT: "marhabaan"            , fraseA: "مرحبا" }
+            , { frase: "olá"                , fraseT: "marhabaan"            , fraseA: "مرحبا" }
+            , { frase: "onde"               , fraseT: "'ayn"                 , fraseA: "أين" }
+            , { frase: "os"                 , fraseT: "al"                   , fraseA: "ال" }
+            , { frase: "para"               , fraseT: "'iilaa ean ealaa"     , fraseA: "إلى عن على" }
+            , { frase: "perto de"           , fraseT: "qarib min"            , fraseA: "قريب من" }
+            , { frase: "por favor"          , fraseT: "raja'"                , fraseA: "رجاء" }
+            , { frase: "porque"             , fraseT: "li'ana"               , fraseA: "لان" }
+            , { frase: "pouco"              , fraseT: "qalil"                , fraseA: "قليل" }
+            , { frase: "qual a sua idade?"  , fraseT: "kam eamruk?"          , fraseA: "كم عمرك؟" }
+            , { frase: "qual o seu nome?"   , fraseT: "ma hu asmak?"         , fraseA: "ما هو اسمك؟" }
+            , { frase: "quando"             , fraseT: "mati"                 , fraseA: "متي" }
+            , { frase: "quanto"             , fraseT: "kam althaman"         , fraseA: "كم الثمن" }
+            , { frase: "quantos"            , fraseT: "kam aleadad"          , fraseA: "كم العدد" }
+            , { frase: "ruim"               , fraseT: "sayiya"               , fraseA: "سيئة" }
+            , { frase: "rápido"             , fraseT: "bsre"                 , fraseA: "بسرعة" }
+            , { frase: "saúde"              , fraseT: "fi sihtik"            , fraseA: "في صحتك" }
+            , { frase: "se"                 , fraseT: "'iidha"               , fraseA: "إذا" }
+            , { frase: "sem"                , fraseT: "bidun"                , fraseA: "بدون" }
+            , { frase: "seu"                , fraseT: "alkhasu bik"          , fraseA: "الخاص بك" }
+            , { frase: "sua"                , fraseT: "alkhasu bik"          , fraseA: "الخاص بك" }
+            , { frase: "seus"               , fraseT: "hum"                  , fraseA: "هم" }
+            , { frase: "sim"                , fraseT: "nem"                  , fraseA: "نعم" }
+            , { frase: "socorro!"           , fraseT: "musaeadat!"           , fraseA: "مساعدة!" }
+            , { frase: "suas"               , fraseT: "alkhasu bik"          , fraseA: "الخاص بك" }
+            , { frase: "suficiente"         , fraseT: "yakfi"                , fraseA: "يكفي" }
+            , { frase: "também"             , fraseT: "'aydaan"              , fraseA: "أيضا" }
+            , { frase: "tchau"              , fraseT: "wadaeaan"             , fraseA: "وداعا" }
+            , { frase: "adeus"              , fraseT: "wadaeaan"             , fraseA: "وداعا" }
+            , { frase: "um"                 , fraseT: "wahid"                , fraseA: "واحد" }
+            , { frase: "um pouco"           , fraseT: "alqlyl"               , fraseA: "القليل" }
+            , { frase: "umas"               , fraseT: "bed"                  , fraseA: "بعض" }
+            , { frase: "uns"                , fraseT: "bed"                  , fraseA: "بعض" }
+            , { frase: "velho"              , fraseT: "qadim"                , fraseA: "قديم" }
+            , { frase: "você"               , fraseT: "'ant"                 , fraseA: "أنت" }
+            , { frase: "vocês"              , fraseT: "'ant"                 , fraseA: "أنت" }
+        ];
+
+
+        $(document).ready(function(){
+
+            executeProgram();
+
+            $("body").on('keyup', 'textarea', function(){
+                validar();
+            });
+
+            $("body").on('click', 'button', function(){
+                if ($("#recorde").text() < $("#acertos").text()) {
+                    $("#recorde").text( $("#acertos").text() )
+                }
+                $("#acertos").text(0);
+                executeProgram();
+            });
+
+            /* modo arabe */
+            $("#tecladoVirtual i").click(function(){
+                $("textarea").val( $("textarea").val() + $(this).text() );
+                validar();
+            });
+        });
+
+        let n = 0;
+        let responderEm = 'AR';
+        function executeProgram ()
+        {
+            n = getRandomInt(0, frases.length);
+            let r = getRandomInt(0, 2);
+            console.log(r);
+            if ( r == 1 ) {
+                responderEm = 'AR';
+                $("#tecladoVirtual").fadeIn();
+                $("#conteudo").html( frases[n].frase );
+                $("#conteudo").attr('title', frases[n].fraseA );
+                $("#dica").html( frases[n].fraseT );
+            } else {
+                responderEm = 'PT';
+                $("#tecladoVirtual").fadeOut();
+                $("#conteudo").html( frases[n].fraseA );
+                $("#conteudo").attr('title', frases[n].frase );
+                $("#dica").html( frases[n].fraseT );
+            }
+            // console.log(responderEm);
+        }
+
+        function verificarAcerto ()
+        {
+            if (responderEm == 'PT') {
+                return $("textarea").val().toLowerCase() == frases[n].frase;
+            }
+            return $("textarea").val() == frases[n].fraseA;
+        }
+
+        function getRandomInt (min, max)
+        {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        function validar ()
+        {
+            if ( verificarAcerto() ) {
+                $("#acertos").text( Number($("#acertos").text()) +1 );
+                audios['acerto'].play();
+
+                setTimeout(function(){
+                    executeProgram();
+                    $("textarea").val('');
+                }, 1000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button>Pular</button>
+    <div id="recorde">0</div>
+    <div id="acertos">0</div>
+    <div id="conteudo"></div>
+    <div id="dica"></div>
+    <textarea></textarea>
+
+    <div id="tecladoVirtual">
+        <i>ا</i>
+        <i>ب</i>
+        <i>ت</i>
+        <i>ث</i>
+        <i>ج</i>
+        <i>ح</i>
+        <i>خ</i>
+        <i>د</i>
+        <i>ذ</i>
+        <i>ر</i>
+        <i>ز</i>
+        <i>س</i>
+        <i>ش</i>
+        <br>
+        <i>ص</i>
+        <i>ض</i>
+        <i>ط</i>
+        <i>ظ</i>
+        <i>ع</i>
+        <i>غ</i>
+        <i>ف</i>
+        <i>ق</i>
+        <i>ك</i>
+        <i>ل</i>
+        <i>م</i>
+        <i>ن</i>
+        <i>ه</i>
+        <i>و</i>
+        <i>ي</i>
+        <br>
+        <i id="spaceBar"> </i>
+        <!-- <i>ة</i> -->
+        <!-- <i>ء</i> -->
+
+    </div>
+<br>
+    <select name="queroDigitar" id="queroDigitar">
+      <option value="PT">Português</option>
+      <option value="AR">Árabe</option>
+      <option value="">Ambos</option>
+    </select>
+</body></html>

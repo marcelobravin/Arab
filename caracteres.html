@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171185330-2');
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Memorização Alfabeto Árabe</title>
+    <!-- tempo -->
+    <link rel="shortcut icon" href="iconfinder_Arab League_15797.png" />
+    <style type="text/css">
+        body { text-align: center; background-color: coral}
+        label {
+            cursor: pointer;
+            float: left;
+            margin: 40px 10%;
+            border: 1px solid red;
+            width: 110px;
+            height: 120px;
+            background-color: white;
+
+            font-size: 40px;
+
+            text-shadow: 1px 1px 2px gray;
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var audios = [];
+            audios['acerto'] = new Audio('audio/Vibrant_Game_Shutter_Alert_1_Short_Quick.mp3');
+            audios['erro']   = new Audio('audio/Error or failed.mp3');
+
+            var chars = [
+                { n:  1, letra:'A',  caracter:'alif' ,  som: new Audio('audio/alif_a.mp3') , isolada: "ا", comeco: "ـا", meio: "ـا", fim: "ا", egoista: true},
+                { n:  2, letra:'B',  caracter:'baa'  ,  som: new Audio('audio/baa_a.mp3')  , isolada: "ب", comeco: "ـب", meio: "ـبـ", fim: "بـ", },
+                { n:  3, letra:'T',  caracter:'taa'  ,  som: new Audio('audio/taa_a.mp3')  , isolada: "ت", comeco: "ـت", meio: "ـتـ", fim: "تـ", },
+                { n:  4, letra:'TH', caracter:'thaa' ,  som: new Audio('audio/thaa_a.mp3') , isolada: "ث", comeco: "ـث", meio: "ـثـ", fim: "ثـ", },
+                { n:  5, letra:'J',  caracter:'jiim' ,  som: new Audio('audio/jiim_a.mp3') , isolada: "ج", comeco: "ـج", meio: "ـجـ", fim: "جـ", },
+                { n:  6, letra:'H',  caracter:'Haa'  ,  som: new Audio('audio/Haa_a1.mp3') , isolada: "ح", comeco: "ـح", meio: "ـحـ", fim: "حـ", },
+                { n:  7, letra:'KH', caracter:'khaa' ,  som: new Audio('audio/khaa_a.mp3') , isolada: "خ", comeco: "ـخ", meio: "ـخـ", fim: "خـ", },
+                { n:  8, letra:'D',  caracter:'daal' ,  som: new Audio('audio/daal_a.mp3') , isolada: "د", comeco: "ـد", meio: "ـد", fim: "د", egoista: true},
+                { n:  9, letra:'DH', caracter:'dhaal',  som: new Audio('audio/dhaal_a.mp3'), isolada: "ذ", comeco: "ـذ", meio: "ـذ", fim: "ذ", egoista: true},
+                { n: 10, letra:'R',  caracter:'raa'  ,  som: new Audio('audio/raa_a.mp3')  , isolada: "ر", comeco: "ـر", meio: "ـر", fim: "ر", egoista: true},
+                { n: 11, letra:'Z',  caracter:'zaa'  ,  som: new Audio('audio/zaa_a.mp3')  , isolada: "ز", comeco: "ـز", meio: "ـز", fim: "ز", egoista: true},
+                { n: 12, letra:'S',  caracter:'siin' ,  som: new Audio('audio/siin_a.mp3') , isolada: "س", comeco: "ـس", meio: "ـسـ", fim: "سـ", },
+                { n: 13, letra:'SH', caracter:'shiin',  som: new Audio('audio/shiin_a.mp3'), isolada: "ش", comeco: "ـش", meio: "ـشـ", fim: "شـ", },
+                { n: 14, letra:'S',  caracter:'saad' ,  som: new Audio('audio/saad_a.mp3') , isolada: "ص", comeco: "ـص", meio: "ـصـ", fim: "صـ", },
+                { n: 15, letra:'D',  caracter:'daad' ,  som: new Audio('audio/daad_a.mp3') , isolada: "ض", comeco: "ـض", meio: "ـضـ", fim: "ضـ", },
+                { n: 16, letra:'T',  caracter:'Taa2' ,  som: new Audio('audio/Taa2_a.mp3') , isolada: "ط", comeco: "ـط", meio: "ـطـ", fim: "طـ", },
+                { n: 17, letra:'DH', caracter:'dhaa' ,  som: new Audio('audio/dhaa_a.mp3') , isolada: "ظ", comeco: "ـظ", meio: "ـظـ", fim: "ظـ", },
+                { n: 18, letra:'A',  caracter:'ayn'  ,  som: new Audio('audio/ayn_a.mp3')  , isolada: "ع", comeco: "ـع", meio: "ـعـ", fim: "عـ", },
+                { n: 19, letra:'GH', caracter:'ghayn',  som: new Audio('audio/ghayn_a.mp3'), isolada: "غ", comeco: "ـغ", meio: "ـغـ", fim: "غـ", },
+                { n: 20, letra:'F',  caracter:'faa'  ,  som: new Audio('audio/faa_a.mp3')  , isolada: "ف", comeco: "ـف", meio: "ـفـ", fim: "فـ", },
+                { n: 21, letra:'Q',  caracter:'qaaf' ,  som: new Audio('audio/qaaf_a.mp3') , isolada: "ق", comeco: "ـق", meio: "ـقـ", fim: "قـ", },
+                { n: 22, letra:'K',  caracter:'kaaf' ,  som: new Audio('audio/kaaf_a.mp3') , isolada: "ك", comeco: "ـك", meio: "ـكـ", fim: "كـ", },
+                { n: 23, letra:'L',  caracter:'laam' ,  som: new Audio('audio/laam_a.mp3') , isolada: "ل", comeco: "ـل", meio: "ـلـ", fim: "لـ", },
+                { n: 24, letra:'M',  caracter:'miim' ,  som: new Audio('audio/miim_a.mp3') , isolada: "م", comeco: "ـم", meio: "ـمـ", fim: "مـ", },
+                { n: 25, letra:'N',  caracter:'nuun' ,  som: new Audio('audio/nuun_a.mp3') , isolada: "ن", comeco: "ـن", meio: "ـنـ", fim: "نـ", },
+                { n: 26, letra:'H',  caracter:'haa'  ,  som: new Audio('audio/haa_a2.mp3') , isolada: "ه", comeco: "ـه", meio: "ـهـ", fim: "هـ", },
+                { n: 27, letra:'W',  caracter:'waaw' ,  som: new Audio('audio/waaw_a.mp3') , isolada: "و", comeco: "ـو", meio: "ـو", fim: "و", },
+                { n: 28, letra:'Y',  caracter:'yaa'  ,  som: new Audio('audio/yaa_a.mp3')  , isolada: "ي", comeco: "ـي", meio: "ـيـ", fim: "يـ", }
+            ];
+
+            $("body").on('click', '[type=radio]', function(){
+                if ( verificarAcerto( $(this).val(), chars ) ) {
+                    $("#acertos").text( Number($("#acertos").text()) +1 );
+                    audios['acerto'].play();
+                } else {
+                    if ($("#recorde").text() < $("#acertos").text()) {
+                        $("#recorde").text( $("#acertos").text() )
+                    }
+                    $("#acertos").text(0);
+                    audios['erro'].play();
+                }
+
+                setTimeout(function(){
+                    executeProgram(chars);
+                }, 1000);
+            });
+
+            $("html").click(function(e){
+                if ($("[type=radio]").length == 0) {
+                    executeProgram(chars);
+                }
+            });
+            $("button").click(function(){
+                chars[n].som.play();
+            });
+        });
+
+        let n = 0;
+        function executeProgram (chars)
+        {
+            n = getRandomInt (0, chars.length);
+            chars[n].som.play();
+
+            var alternativas = gerarAlternativas(n, chars.length);
+
+            let x = '';
+            alternativas.forEach(function(a, b){
+                console.log(a, n);
+                x += "<label>";
+                // if (a == n) { x += ">"; }
+                // x += a;
+                // x += "<br>";
+                x += "<input type='radio' name='resposta' value='"+ chars[alternativas[b]].caracter +"'>";
+                x += "<br>";
+
+                let position = getRandomInt (0, 4);
+                switch (position) {
+                    case 0:
+                        x += chars[alternativas[b]].isolada;
+                        // x += "isolada";
+                    break;
+                    case 1:
+                        x += chars[alternativas[b]].comeco;
+                        // x += "comeco";
+                    break;
+                    case 2:
+                        x += chars[alternativas[b]].meio;
+                        // x += "meio";
+                    break;
+                    case 3:
+                        x += chars[alternativas[b]].fim;
+                        // x += "fim";
+                    break;
+
+                }
+                // x += "<br>";
+                // x += chars[alternativas[b]].caracter;
+                // x += chars[alternativas[b]].isolada;
+                // x += "<br>";
+                // x += chars[alternativas[b]].comeco;
+                // x += "<br>";
+                // x += chars[alternativas[b]].meio;
+                // x += "<br>";
+                // x += chars[alternativas[b]].fim;
+                x += "</label>";
+            });
+
+            $("#conteudo").html( x );
+        }
+
+        function verificarAcerto ( resposta, chars )
+        {
+            return resposta == chars[n].caracter
+        }
+
+        function gerarAlternativas (alvo, length)
+        {
+            let alternativas = [...new Set()];
+            let inseriuCorreta = false;
+
+            while ( alternativas.length < 6 ) {
+                let n = getRandomInt (0, length);
+
+                if ( n != alvo ) {
+                    alternativas.push(n);
+                    alternativas = [...new Set(alternativas)];
+                } else {
+                    if ( !inseriuCorreta ) {
+                        inseriuCorreta = true;
+                        alternativas.push(n);
+                        alternativas = [...new Set(alternativas)];
+                    }
+                }
+            }
+
+            if ( !inseriuCorreta ) {
+                let x = getRandomInt (0, 5);
+                alternativas[x] = n;
+                console.log("Erro, não tem correta, inserida no " +x)
+            }
+
+            return alternativas;
+        }
+
+        function getRandomInt (min, max)
+        {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+    </script>
+</head>
+<body>
+    <button>Play</button>
+    <div id="recorde">0</div>
+    <div id="acertos">0</div>
+    <div id="conteudo">
+        <label></label>
+        <label></label>
+        <label></label>
+        <label></label>
+        <label></label>
+        <label></label>
+    </div>
+</body></html>

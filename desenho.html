@@ -1,0 +1,188 @@
+<script type="text/javascript">
+    var canvas, ctx, flag = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0,
+        dot_flag = false;
+
+    var x = "#392bc0",
+        y = 6;
+
+    var isDown = false;
+
+    function init() {
+        canvas = document.getElementById('can');
+        ctx = canvas.getContext("2d");
+        w = canvas.width;
+        h = canvas.height;
+
+        canvas.addEventListener("mousemove", function (e) {
+            findxy('move', e)
+        }, false);
+        canvas.addEventListener("mousedown", function (e) {
+            document.getElementById("span").innerHTML = "dragging: true";
+            isDown = true;
+            findxy('down', e)
+        }, false);
+        canvas.addEventListener("mouseup", function (e) {
+            document.getElementById("span").innerHTML = "dragging: false";
+            isDown = false;
+            findxy('up', e)
+        }, false);
+        canvas.addEventListener("mouseout", function (e) {
+            findxy('out', e)
+        }, false);
+
+        canvas.addEventListener("mouseenter", function (e) {
+            if (isDown) {
+                findxy('down', e)
+            }
+        }, false);
+    }
+
+    function draw() {
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(currX, currY);
+        ctx.strokeStyle = x;
+        ctx.lineWidth = y;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function erase() {
+        ctx.clearRect(0, 0, w, h);
+        document.getElementById("canvasimg").style.display = "none";
+    }
+
+    function save() {
+        document.getElementById("canvasimg").style.border = "2px solid";
+        var dataURL = canvas.toDataURL();
+        document.getElementById("canvasimg").src = dataURL;
+        document.getElementById("canvasimg").style.display = "inline";
+    }
+
+    function findxy(res, e) {
+        document.getElementById("p").innerHTML = "left: " + prevX + ", top: " + prevY;
+        document.getElementById("i").innerHTML = "left: " + currX + ", top: " + currY;
+
+        if (res == 'down') {
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+
+            flag = true;
+            dot_flag = true;
+            if (dot_flag) {
+                ctx.beginPath();
+                ctx.fillStyle = x;
+                // ctx.fillRect(currX, currY, 2, 2);
+
+                ctx.arc(currX, currY, 2, 0, 2 * Math.PI, false);
+                // ctx.fillStyle = 'green';
+                // context.fill();
+                // context.lineWidth = 5;
+
+
+                ctx.fill();
+                // ctx.lineWidth = 5;
+                // ctx.strokeStyle = '#003300';
+                ctx.stroke()
+
+
+                ctx.closePath();
+                dot_flag = false;
+            }
+        }
+        if (res == 'up' || res == "out") {
+            flag = false;
+        }
+        if (res == 'move') {
+            if (flag) {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+                draw();
+            }
+        }
+    }
+
+    function color(obj) {
+        switch (obj.id) {
+            case "green"  : x = "green";  break;
+            case "blue"   : x = "blue";   break;
+            case "red"    : x = "red";    break;
+            case "yellow" : x = "yellow"; break;
+            case "orange" : x = "orange"; break;
+            case "black"  : x = "black";  break;
+            case "white"  : x = "white";  break;
+        }
+        if (x == "white") y = 14;
+        else y = 6;
+    }
+
+    function exibeLetra ()
+    {
+        // var canvas = document.getElementById("myCanvas");
+        // var ctx = canvas.getContext("2d");
+        ctx.font = "330px Arial";
+        ctx.fillText("ج", 100, 200);
+    }
+</script>
+<style type="text/css">
+    body {
+      background-color: darkgoldenrod;
+      padding: 10px;
+    }
+
+    canvas {
+      border: 1px solid black;
+      background-color: white;
+    }
+
+    .colorSelect {
+        display: inline-block;
+        width:10px;
+        height:10px;
+    }
+
+    #green  { background:green }
+    #blue   { background:blue }
+    #red    { background:red }
+    #yellow { background:yellow }
+    #orange { background:orange }
+    #black  { background:black }
+</style>
+<body onload="init()">
+    <p id="p">0</p>
+    <i id="i">0</i>
+    <br>
+    <span id="span">dragging: </span>
+
+    <center>
+        <div class="colorSelect" id="green" onclick="color(this)"></div>
+        <div class="colorSelect" id="blue" onclick="color(this)"></div>
+        <div class="colorSelect" id="red" onclick="color(this)"></div>
+        <div class="colorSelect" id="yellow" onclick="color(this)"></div>
+        <div class="colorSelect" id="orange" onclick="color(this)"></div>
+        <div class="colorSelect" id="black" onclick="color(this)"></div>
+        <!-- <div style="">Eraser</div> -->
+        <div class="colorSelect" style="width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
+        <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+
+        <div id="canvasContainer">
+            <canvas id="can" width="400" height="400" style="border:2px solid #c3c3c3;">
+                Your browser does not support the canvas element.
+            </canvas>
+        </div>
+
+        <input type="button" value="save" id="btn" size="30" onclick="save()">
+        <input type="button" value="clear" id="clr" size="23" onclick="erase()">
+        <input type="button" value="show" id="show" size="23" onclick="exibeLetra()">
+    </center>
+    </body>
+</html>

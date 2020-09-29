@@ -10,12 +10,13 @@
 
       gtag('config', 'UA-171185330-2');
     </script>
-    <!-- treino letras, palavras [exibe palavra pt/arabe pra vc digitar em arabe/pt] -->
-    <!-- treino vocabulario [exibe palavra pt/arabe pra vc traduzir em arabe/pt] -->
+    <!-- controle de volume -->
+    <!-- drag and draw -->
+    <!-- sentence generator -->
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Alfabeto Árabe</title>
-    <link rel="shortcut icon" href="iconfinder_Arab League_15797.png" />
+    <link rel="shortcut icon" href="assets/iconfinder_Arab League_15797.png" />
     <style type="text/css">
         th {
             text-transform: uppercase;
@@ -200,20 +201,20 @@
             vertical-align: middle;
          }
 
-         li {
+        li {
             margin: 20px 0;
             list-style: decimal;
             /*display: inline-block;*/
             /*width: 300px;*/
             /*float: right;*/
-         }
+        }
 
-         a {
+        a {
             text-decoration: none
-         }
+        }
     </style>
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="jquery.min.js"></script>
+    <script src="assets/jquery.min.js"></script>
 
     <script>
         $(document).on('click', '.copy', function(e) {
@@ -261,41 +262,42 @@
 
         /* Fonte: https://lang_src.s3.amazonaws.com/yaa_a.mp3 */
         var audios = [];
-        audios['alif_a']  = new Audio('audio/alif_a.mp3');
-        audios['ayn_a']   = new Audio('audio/ayn_a.mp3');
-        audios['baa_a']   = new Audio('audio/baa_a.mp3');
-        audios['daad_a']  = new Audio('audio/daad_a.mp3');
-        audios['daal_a']  = new Audio('audio/daal_a.mp3');
-        audios['dhaa_a']  = new Audio('audio/dhaa_a.mp3');
-        audios['dhaal_a'] = new Audio('audio/dhaal_a.mp3');
-        audios['faa_a']   = new Audio('audio/faa_a.mp3');
-        audios['ghayn_a'] = new Audio('audio/ghayn_a.mp3');
-        audios['Haa_a1']  = new Audio('audio/Haa_a1.mp3');
-        audios['haa_a2']  = new Audio('audio/haa_a2.mp3');
-        audios['jiim_a']  = new Audio('audio/jiim_a.mp3');
-        audios['kaaf_a']  = new Audio('audio/kaaf_a.mp3');
-        audios['khaa_a']  = new Audio('audio/khaa_a.mp3');
-        audios['laam_a']  = new Audio('audio/laam_a.mp3');
-        audios['miim_a']  = new Audio('audio/miim_a.mp3');
-        audios['nuun_a']  = new Audio('audio/nuun_a.mp3');
-        audios['qaaf_a']  = new Audio('audio/qaaf_a.mp3');
-        audios['raa_a']   = new Audio('audio/raa_a.mp3');
-        audios['saad_a']  = new Audio('audio/saad_a.mp3');
-        audios['shiin_a'] = new Audio('audio/shiin_a.mp3');
-        audios['siin_a']  = new Audio('audio/siin_a.mp3');
-        audios['taa_a']   = new Audio('audio/taa_a.mp3');
-        audios['Taa2_a']  = new Audio('audio/Taa2_a.mp3');
-        audios['thaa_a']  = new Audio('audio/thaa_a.mp3');
-        audios['waaw_a']  = new Audio('audio/waaw_a.mp3');
-        audios['yaa_a']   = new Audio('audio/yaa_a.mp3');
-        audios['zaa_a']   = new Audio('audio/zaa_a.mp3');
+        audios['alif_a']  = new Audio('assets/audio/alif_a.mp3');
+        audios['ayn_a']   = new Audio('assets/audio/ayn_a.mp3');
+        audios['baa_a']   = new Audio('assets/audio/baa_a.mp3');
+        audios['daad_a']  = new Audio('assets/audio/daad_a.mp3');
+        audios['daal_a']  = new Audio('assets/audio/daal_a.mp3');
+        audios['dhaa_a']  = new Audio('assets/audio/dhaa_a.mp3');
+        audios['dhaal_a'] = new Audio('assets/audio/dhaal_a.mp3');
+        audios['faa_a']   = new Audio('assets/audio/faa_a.mp3');
+        audios['ghayn_a'] = new Audio('assets/audio/ghayn_a.mp3');
+        audios['Haa_a1']  = new Audio('assets/audio/Haa_a1.mp3');
+        audios['haa_a2']  = new Audio('assets/audio/haa_a2.mp3');
+        audios['jiim_a']  = new Audio('assets/audio/jiim_a.mp3');
+        audios['kaaf_a']  = new Audio('assets/audio/kaaf_a.mp3');
+        audios['khaa_a']  = new Audio('assets/audio/khaa_a.mp3');
+        audios['laam_a']  = new Audio('assets/audio/laam_a.mp3');
+        audios['miim_a']  = new Audio('assets/audio/miim_a.mp3');
+        audios['nuun_a']  = new Audio('assets/audio/nuun_a.mp3');
+        audios['qaaf_a']  = new Audio('assets/audio/qaaf_a.mp3');
+        audios['raa_a']   = new Audio('assets/audio/raa_a.mp3');
+        audios['saad_a']  = new Audio('assets/audio/saad_a.mp3');
+        audios['shiin_a'] = new Audio('assets/audio/shiin_a.mp3');
+        audios['siin_a']  = new Audio('assets/audio/siin_a.mp3');
+        audios['taa_a']   = new Audio('assets/audio/taa_a.mp3');
+        audios['Taa2_a']  = new Audio('assets/audio/Taa2_a.mp3');
+        audios['thaa_a']  = new Audio('assets/audio/thaa_a.mp3');
+        audios['waaw_a']  = new Audio('assets/audio/waaw_a.mp3');
+        audios['yaa_a']   = new Audio('assets/audio/yaa_a.mp3');
+        audios['zaa_a']   = new Audio('assets/audio/zaa_a.mp3');
     </script>
 </head>
 
 <body>
     <p>
-        <a href="caracteres.html">Treino de Caracteres</a>
+        <a href="caracteres.html">Memorização de Caracteres</a>
         <a href="vocabulario.html">Treino de Vocabulário</a>
+        <a href="desenho.html">Treino de Escrita</a>
     </p>
     <span id="zoomedChar"></span>
 
@@ -653,146 +655,146 @@
     <ul>
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-saudi-arabia.html">
-                <img class="flag" src="flags/saudi-arabia_flag-wave-500.png">
+                <img class="flag" src="assets/flags/saudi-arabia_flag-wave-500.png">
                 Arábia Saudita
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-algeria.html">
-                <img class="flag" src="flags/algeria_flag-wave-500.png">
+                <img class="flag" src="assets/flags/algeria_flag-wave-500.png">
                 Argélia
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-bahrain.html">
-                <img class="flag" src="flags/bahrain_flag-wave-500.png">
+                <img class="flag" src="assets/flags/bahrain_flag-wave-500.png">
                 Bahrein
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-qatar.html">
-                <img class="flag" src="flags/qatar_flag-wave-500.png">
+                <img class="flag" src="assets/flags/qatar_flag-wave-500.png">
                 Catar
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-chad.html">
-                <img class="flag" src="flags/chad_flag-wave-500.png">
+                <img class="flag" src="assets/flags/chad_flag-wave-500.png">
                 Chade
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-comoros.html">
-                <img class="flag" src="flags/comoros_flag-wave-500.png">
+                <img class="flag" src="assets/flags/comoros_flag-wave-500.png">
                 Comores
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-djibouti.html">
-                <img class="flag" src="flags/djibouti_flag-wave-500.png">
+                <img class="flag" src="assets/flags/djibouti_flag-wave-500.png">
                 Djibouti
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-egypt.html">
-                <img class="flag" src="flags/egypt_flag-wave-500.png">
+                <img class="flag" src="assets/flags/egypt_flag-wave-500.png">
                 Egito
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-united-arab-emirates-the.html">
-                <img class="flag" src="flags/united-arab-emirates_flag-wave-500.png">
+                <img class="flag" src="assets/flags/united-arab-emirates_flag-wave-500.png">
                 Emirados Árabes Unidos
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-eritrea.html">
-                <img class="flag" src="flags/eritrea_flag-wave-500.png">
+                <img class="flag" src="assets/flags/eritrea_flag-wave-500.png">
                 Eritreia
             </a>
         </li>
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-yemen.html">
-                <img class="flag" src="flags/yemen_flag-wave-500.png">
+                <img class="flag" src="assets/flags/yemen_flag-wave-500.png">
                 Iêmen
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-israel.html">
-                <img class="flag" src="flags/israel_flag-wave-500.png">
+                <img class="flag" src="assets/flags/israel_flag-wave-500.png">
                 Israel
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-iraq.html">
-                <img class="flag" src="flags/iraq_flag-wave-500.png">
+                <img class="flag" src="assets/flags/iraq_flag-wave-500.png">
                 Iraque
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-jordan.html">
-                <img class="flag" src="flags/jordan_flag-wave-500.png">
+                <img class="flag" src="assets/flags/jordan_flag-wave-500.png">
                 Jordânia
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-kuwait.html">
-                <img class="flag" src="flags/kuwait_flag-wave-500.png">
+                <img class="flag" src="assets/flags/kuwait_flag-wave-500.png">
                 Kuwait
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-lebanon.html">
-                <img class="flag" src="flags/lebanon_flag-wave-500.png">
+                <img class="flag" src="assets/flags/lebanon_flag-wave-500.png">
                 Líbano
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-libya.html">
-                <img class="flag" src="flags/libya_flag-wave-500.png">
+                <img class="flag" src="assets/flags/libya_flag-wave-500.png">
                 Líbia
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-morocco.html">
-                <img class="flag" src="flags/morocco_flag-wave-500.png">
+                <img class="flag" src="assets/flags/morocco_flag-wave-500.png">
                 Marrocos
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-mauritania.html">
-                <img class="flag" src="flags/mauritania_flag-wave-500.png">
+                <img class="flag" src="assets/flags/mauritania_flag-wave-500.png">
                 Mauritânia
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-oman.html">
-                <img class="flag" src="flags/oman_flag-wave-500.png">
+                <img class="flag" src="assets/flags/oman_flag-wave-500.png">
                 Omã
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-palestine.html">
-                <img class="flag" src="flags/palestine_flag-wave-500.png">
+                <img class="flag" src="assets/flags/palestine_flag-wave-500.png">
                 Palestina
             </a>
         </li>
@@ -800,21 +802,21 @@
         <li>
             <!-- =========================================================== -->
             <a target="_blank" href="https://pt.wikipedia.org/wiki/Saara_Ocidental">
-                <img class="flag" src="flags/188px-Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg.png">
+                <img class="flag" src="assets/flags/188px-Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg.png">
                 Saara Ocidental
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-syria.html">
-                <img class="flag" src="flags/syria_flag-wave-500.png">
+                <img class="flag" src="assets/flags/syria_flag-wave-500.png">
                 Síria
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-somalia.html">
-                <img class="flag" src="flags/somalia_flag-wave-500.png">
+                <img class="flag" src="assets/flags/somalia_flag-wave-500.png">
                 Somália
             </a>
         </li>
@@ -822,21 +824,21 @@
         <li>
             <!-- =========================================================== -->
             <a target="_blank" href="https://pt.wikipedia.org/wiki/Somalil%C3%A2ndia">
-                <img class="flag" src="flags/188px-Flag_of_Somaliland.svg.png">
+                <img class="flag" src="assets/flags/188px-Flag_of_Somaliland.svg.png">
                 Somalilândia
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-sudan.html">
-                <img class="flag" src="flags/sudan_flag-wave-500.png">
+                <img class="flag" src="assets/flags/sudan_flag-wave-500.png">
                 Sudão
             </a>
         </li>
 
         <li>
             <a target="_blank" href="https://www.countryflags.com/en/flag-of-tunisia.html">
-                <img class="flag" src="flags/tunisia_flag-wave-500.png">
+                <img class="flag" src="assets/flags/tunisia_flag-wave-500.png">
                 Tunísia
             </a>
         </li>

@@ -1,162 +1,331 @@
-<script type="text/javascript">
-    var canvas, ctx, flag = false,
-        prevX = 0,
-        currX = 0,
-        prevY = 0,
-        currY = 0,
-        dot_flag = false;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171185330-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    var x = "#392bc0",
-        y = 6;
+      gtag('config', 'UA-171185330-2');
+    </script>
 
-    var isDown = false;
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Memorização Alfabeto Árabe</title>
 
-    function init() {
-        canvas = document.getElementById('can');
-        ctx = canvas.getContext("2d");
-        w = canvas.width;
-        h = canvas.height;
+    <link rel="shortcut icon" href="assets/iconfinder_Arab League_15797.png" />
+    <style type="text/css">
 
-        canvas.addEventListener("mousemove", function (e) {
-            findxy('move', e)
-        }, false);
-        canvas.addEventListener("mousedown", function (e) {
-            document.getElementById("span").innerHTML = "dragging: true";
-            isDown = true;
-            findxy('down', e)
-        }, false);
-        canvas.addEventListener("mouseup", function (e) {
-            document.getElementById("span").innerHTML = "dragging: false";
-            isDown = false;
-            findxy('up', e)
-        }, false);
-        canvas.addEventListener("mouseout", function (e) {
-            findxy('out', e)
-        }, false);
+        body {
+          background-color: darkgoldenrod;
+          padding: 10px;
+        }
 
-        canvas.addEventListener("mouseenter", function (e) {
-            if (isDown) {
+        canvas {
+          border: 1px solid black;
+          background-color: white;
+        }
+
+        .colorSelect {
+            display: inline-block;
+            width:10px;
+            height:10px;
+        }
+
+        #green  { background:green }
+        #blue   { background:blue }
+        #red    { background:red }
+        #yellow { background:yellow }
+        #orange { background:orange }
+        #black  { background:black }
+
+        body    {
+            border: 30px solid;
+            border-image: url('assets/border-diamonds.png') 30 / 19px round;
+        }
+    </style>
+    <!-- <script src="assets/jquery.min.js"></script> -->
+    <script>
+        var chars = [
+            { n:  1, letra:'A',  caracter:'alif' ,  som: new Audio('assets/audio/alif_a.mp3') , isolada: "ا", fim: "ـا", meio: "ـا", comeco: "ا", egoista: true},
+            { n:  2, letra:'B',  caracter:'baa'  ,  som: new Audio('assets/audio/baa_a.mp3')  , isolada: "ب", fim: "ـب", meio: "ـبـ", comeco: "بـ", },
+            { n:  3, letra:'T',  caracter:'taa'  ,  som: new Audio('assets/audio/taa_a.mp3')  , isolada: "ت", fim: "ـت", meio: "ـتـ", comeco: "تـ", },
+            { n:  4, letra:'TH', caracter:'thaa' ,  som: new Audio('assets/audio/thaa_a.mp3') , isolada: "ث", fim: "ـث", meio: "ـثـ", comeco: "ثـ", },
+            { n:  5, letra:'J',  caracter:'jiim' ,  som: new Audio('assets/audio/jiim_a.mp3') , isolada: "ج", fim: "ـج", meio: "ـجـ", comeco: "جـ", },
+            { n:  6, letra:'H',  caracter:'Haa'  ,  som: new Audio('assets/audio/Haa_a1.mp3') , isolada: "ح", fim: "ـح", meio: "ـحـ", comeco: "حـ", },
+            { n:  7, letra:'KH', caracter:'khaa' ,  som: new Audio('assets/audio/khaa_a.mp3') , isolada: "خ", fim: "ـخ", meio: "ـخـ", comeco: "خـ", },
+            { n:  8, letra:'D',  caracter:'daal' ,  som: new Audio('assets/audio/daal_a.mp3') , isolada: "د", fim: "ـد", meio: "ـد", comeco: "د", egoista: true},
+            { n:  9, letra:'DH', caracter:'dhaal',  som: new Audio('assets/audio/dhaal_a.mp3'), isolada: "ذ", fim: "ـذ", meio: "ـذ", comeco: "ذ", egoista: true},
+            { n: 10, letra:'R',  caracter:'raa'  ,  som: new Audio('assets/audio/raa_a.mp3')  , isolada: "ر", fim: "ـر", meio: "ـر", comeco: "ر", egoista: true},
+            { n: 11, letra:'Z',  caracter:'zaa'  ,  som: new Audio('assets/audio/zaa_a.mp3')  , isolada: "ز", fim: "ـز", meio: "ـز", comeco: "ز", egoista: true},
+            { n: 12, letra:'S',  caracter:'siin' ,  som: new Audio('assets/audio/siin_a.mp3') , isolada: "س", fim: "ـس", meio: "ـسـ", comeco: "سـ", },
+            { n: 13, letra:'SH', caracter:'shiin',  som: new Audio('assets/audio/shiin_a.mp3'), isolada: "ش", fim: "ـش", meio: "ـشـ", comeco: "شـ", },
+            { n: 14, letra:'S',  caracter:'saad' ,  som: new Audio('assets/audio/saad_a.mp3') , isolada: "ص", fim: "ـص", meio: "ـصـ", comeco: "صـ", },
+            { n: 15, letra:'D',  caracter:'daad' ,  som: new Audio('assets/audio/daad_a.mp3') , isolada: "ض", fim: "ـض", meio: "ـضـ", comeco: "ضـ", },
+            { n: 16, letra:'T',  caracter:'Taa2' ,  som: new Audio('assets/audio/Taa2_a.mp3') , isolada: "ط", fim: "ـط", meio: "ـطـ", comeco: "طـ", },
+            { n: 17, letra:'DH', caracter:'dhaa' ,  som: new Audio('assets/audio/dhaa_a.mp3') , isolada: "ظ", fim: "ـظ", meio: "ـظـ", comeco: "ظـ", },
+            { n: 18, letra:'A',  caracter:'ayn'  ,  som: new Audio('assets/audio/ayn_a.mp3')  , isolada: "ع", fim: "ـع", meio: "ـعـ", comeco: "عـ", },
+            { n: 19, letra:'GH', caracter:'ghayn',  som: new Audio('assets/audio/ghayn_a.mp3'), isolada: "غ", fim: "ـغ", meio: "ـغـ", comeco: "غـ", },
+            { n: 20, letra:'F',  caracter:'faa'  ,  som: new Audio('assets/audio/faa_a.mp3')  , isolada: "ف", fim: "ـف", meio: "ـفـ", comeco: "فـ", },
+            { n: 21, letra:'Q',  caracter:'qaaf' ,  som: new Audio('assets/audio/qaaf_a.mp3') , isolada: "ق", fim: "ـق", meio: "ـقـ", comeco: "قـ", },
+            { n: 22, letra:'K',  caracter:'kaaf' ,  som: new Audio('assets/audio/kaaf_a.mp3') , isolada: "ك", fim: "ـك", meio: "ـكـ", comeco: "كـ", },
+            { n: 23, letra:'L',  caracter:'laam' ,  som: new Audio('assets/audio/laam_a.mp3') , isolada: "ل", fim: "ـل", meio: "ـلـ", comeco: "لـ", },
+            { n: 24, letra:'M',  caracter:'miim' ,  som: new Audio('assets/audio/miim_a.mp3') , isolada: "م", fim: "ـم", meio: "ـمـ", comeco: "مـ", },
+            { n: 25, letra:'N',  caracter:'nuun' ,  som: new Audio('assets/audio/nuun_a.mp3') , isolada: "ن", fim: "ـن", meio: "ـنـ", comeco: "نـ", },
+            { n: 26, letra:'H',  caracter:'haa'  ,  som: new Audio('assets/audio/haa_a2.mp3') , isolada: "ه", fim: "ـه", meio: "ـهـ", comeco: "هـ", },
+            { n: 27, letra:'W',  caracter:'waaw' ,  som: new Audio('assets/audio/waaw_a.mp3') , isolada: "و", fim: "ـو", meio: "ـو", comeco: "و", },
+            { n: 28, letra:'Y',  caracter:'yaa'  ,  som: new Audio('assets/audio/yaa_a.mp3')  , isolada: "ي", fim: "ـي", meio: "ـيـ", comeco: "يـ", }
+        ];
+
+        var canvas, ctx, flag = false,
+            prevX = 0,
+            currX = 0,
+            prevY = 0,
+            currY = 0,
+            dot_flag = false;
+
+        var pencilWidth = 6;
+
+        var isDown = false;
+        var letra = "ج";
+
+        function init() {
+            sorteiaLetra();
+            canvas = document.getElementById('can');
+            ctx = canvas.getContext("2d");
+            w = canvas.width;
+            h = canvas.height;
+/*
+el.addEventListener("touchstart", handleStart, false);
+el.addEventListener("touchend", handleEnd, false);
+el.addEventListener("touchcancel", handleCancel, false);
+el.addEventListener("touchleave", handleEnd, false);
+el.addEventListener("touchmove", handleMove, false);
+*/
+canvas.addEventListener("touchmove", function (e) {
+    // console.log("touchmove");
+    // findxy('move', e)
+    handleMove(e);
+}, false);
+canvas.addEventListener("touchstart", function (e) {
+    // console.log("touchstart");
+    document.getElementById("span").innerHTML = "dragging: true";
+    isDown = true;
+    findxy('down', e)
+}, false);
+
+/*
+document.addEventListener("touchcancel", function (e) {
+    console.log("touchcancel");
+    document.getElementById("span").innerHTML = "dragging: false";
+    isDown = false;
+    findxy('up', e)
+}, false);
+canvas.addEventListener("touchleave", function (e) {
+    console.log("touchleave");
+    findxy('out', e)
+}, false);
+*/
+function handleMove(evt) {
+  evt.preventDefault();
+  var touches = evt.changedTouches;
+  // console.log(touches);
+
+  for (var i=0; i < touches.length; i++) {
+    // var idx = ongoingTouchIndexById(touches[i].identifier);
+    var idx = touches[i].identifier;
+
+    if(idx >= 0) {
+      // log("continuing touch "+idx);
+      ctx.beginPath();
+      // log("ctx.moveTo("+ongoingTouches[idx].pageX+", "+ongoingTouches[idx].pageY+");");
+
+      // canvas.offsetLeft;
+      // canvas.offsetTop;
+
+      prevX = currX;
+      prevY = currY;
+      currX = touches[i].pageX-canvas.offsetLeft;
+      currY = touches[i].pageY-canvas.offsetTop;
+
+      // ctx.moveTo(prevX, prevY);
+      // ctx.lineTo(currX, currY);
+      // ctx.strokeStyle = "red";
+      // ctx.stroke();
+      draw("red");
+
+      // ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
+    }
+  }
+}
+
+
+            canvas.addEventListener("mousemove", function (e) {
+                findxy('move', e)
+            }, false);
+            canvas.addEventListener("mousedown", function (e) {
+                document.getElementById("span").innerHTML = "dragging: true";
+                isDown = true;
                 findxy('down', e)
-            }
-        }, false);
-    }
+            }, false);
+            document.addEventListener("mouseup", function (e) {
+                document.getElementById("span").innerHTML = "dragging: false";
+                isDown = false;
+                findxy('up', e)
+            }, false);
+            canvas.addEventListener("mouseout", function (e) {
+                findxy('out', e)
+            }, false);
 
-    function draw() {
-        ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(currX, currY);
-        ctx.strokeStyle = x;
-        ctx.lineWidth = y;
-        ctx.lineCap = 'round';
-        ctx.stroke();
-        ctx.closePath();
-    }
-
-    function erase() {
-        ctx.clearRect(0, 0, w, h);
-        document.getElementById("canvasimg").style.display = "none";
-    }
-
-    function save() {
-        document.getElementById("canvasimg").style.border = "2px solid";
-        var dataURL = canvas.toDataURL();
-        document.getElementById("canvasimg").src = dataURL;
-        document.getElementById("canvasimg").style.display = "inline";
-    }
-
-    function findxy(res, e) {
-        document.getElementById("p").innerHTML = "left: " + prevX + ", top: " + prevY;
-        document.getElementById("i").innerHTML = "left: " + currX + ", top: " + currY;
-
-        if (res == 'down') {
-            prevX = currX;
-            prevY = currY;
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
-
-            flag = true;
-            dot_flag = true;
-            if (dot_flag) {
-                ctx.beginPath();
-                ctx.fillStyle = x;
-                // ctx.fillRect(currX, currY, 2, 2);
-
-                ctx.arc(currX, currY, 2, 0, 2 * Math.PI, false);
-                // ctx.fillStyle = 'green';
-                // context.fill();
-                // context.lineWidth = 5;
-
-
-                ctx.fill();
-                // ctx.lineWidth = 5;
-                // ctx.strokeStyle = '#003300';
-                ctx.stroke()
-
-
-                ctx.closePath();
-                dot_flag = false;
-            }
+            canvas.addEventListener("mouseenter", function (e) {
+                if (isDown) {
+                    findxy('down', e)
+                }
+            }, false);
         }
-        if (res == 'up' || res == "out") {
-            flag = false;
+
+        function draw(color="black") {
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(currX, currY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth   = pencilWidth;
+            ctx.lineCap     = 'round';
+            ctx.stroke();
+            ctx.closePath();
         }
-        if (res == 'move') {
-            if (flag) {
+
+        function erase() {
+            ctx.clearRect(0, 0, w, h);
+            document.getElementById("canvasimg").style.display = "none";
+        }
+
+        function save() {
+            document.getElementById("canvasimg").style.border = "2px solid";
+            var dataURL = canvas.toDataURL();
+            document.getElementById("canvasimg").src = dataURL;
+            document.getElementById("canvasimg").style.display = "inline";
+        }
+
+        function findxy(res, e) {
+            // document.getElementById("p").innerHTML = "left: " + prevX + ", top: " + prevY;
+            // document.getElementById("i").innerHTML = "left: " + currX + ", top: " + currY;
+
+            if (res == 'down') {
                 prevX = currX;
                 prevY = currY;
                 currX = e.clientX - canvas.offsetLeft;
                 currY = e.clientY - canvas.offsetTop;
-                draw();
+
+                flag = true;
+                dot_flag = true;
+                if (dot_flag) {
+                    ctx.beginPath();
+                    // ctx.fillRect(currX, currY, 2, 2);
+
+                    ctx.arc(currX, currY, 2, 0, 2 * Math.PI, false);
+                    // ctx.fillStyle = 'green';
+                    // context.fill();
+                    // context.lineWidth = 5;
+
+
+                    ctx.fill();
+                    // ctx.lineWidth = 5;
+                    // ctx.strokeStyle = '#003300';
+                    ctx.stroke()
+
+
+                    ctx.closePath();
+                    dot_flag = false;
+                }
+            }
+            if (res == 'up' || res == "out") {
+                flag = false;
+            }
+            if (res == 'move') {
+                if (flag) {
+                    prevX = currX;
+                    prevY = currY;
+                    currX = e.clientX - canvas.offsetLeft;
+                    currY = e.clientY - canvas.offsetTop;
+                    draw("#392bc0");
+                }
             }
         }
-    }
 
-    function color(obj) {
-        switch (obj.id) {
-            case "green"  : x = "green";  break;
-            case "blue"   : x = "blue";   break;
-            case "red"    : x = "red";    break;
-            case "yellow" : x = "yellow"; break;
-            case "orange" : x = "orange"; break;
-            case "black"  : x = "black";  break;
-            case "white"  : x = "white";  break;
+        function exibeLetra ()
+        {
+            ctx.font      = "320px Arial";
+            ctx.fillStyle = "#000";
+            // ctx.fillText(letra, 60, 280);
+
+            ctx.textAlign = "center";
+            ctx.textBaseline = "Alphabetic";
+            exibeGuia();
+            letra = letra.replaceAll('ـ', '');
+            ctx.fillText(letra,200, 280);
         }
-        if (x == "white") y = 14;
-        else y = 6;
-    }
 
-    function exibeLetra ()
-    {
-        // var canvas = document.getElementById("myCanvas");
-        // var ctx = canvas.getContext("2d");
-        ctx.font = "330px Arial";
-        ctx.fillText("ج", 100, 200);
-    }
-</script>
-<style type="text/css">
-    body {
-      background-color: darkgoldenrod;
-      padding: 10px;
-    }
+        function exibeGuia ()
+        {
+            ctx.beginPath();
+            ctx.strokeStyle = 'lime';
+            ctx.lineWidth   = pencilWidth;
+            ctx.lineCap     = 'square';
+            ctx.moveTo(0, 25);
+            ctx.lineTo(400, 25);
+            ctx.stroke();
 
-    canvas {
-      border: 1px solid black;
-      background-color: white;
-    }
+            ctx.moveTo(0, 240);
+            ctx.lineTo(400, 240);
+            ctx.stroke();
+            ctx.closePath();
+        }
 
-    .colorSelect {
-        display: inline-block;
-        width:10px;
-        height:10px;
-    }
+        function sorteiaLetra ()
+        {
+            let n = getRandomInt (0, chars.length);
+            chars[n].som.play();
+            sorteiaPosicao(n);
+        }
 
-    #green  { background:green }
-    #blue   { background:blue }
-    #red    { background:red }
-    #yellow { background:yellow }
-    #orange { background:orange }
-    #black  { background:black }
-</style>
+        function sorteiaPosicao (n)
+        {
+            let position = getRandomInt (0, 4);
+            switch (position) {
+                case 0: letra = chars[n].isolada;
+                    document.getElementById("i").innerHTML = "Posição: isolada";
+                    break;
+                case 1: letra = chars[n].comeco;
+                    document.getElementById("i").innerHTML = "Posição: comeco";
+                    break;
+                case 2: letra = chars[n].meio;
+                    document.getElementById("i").innerHTML = "Posição: meio";
+                    break;
+                case 3: letra = chars[n].fim;
+                    document.getElementById("i").innerHTML = "Posição: fim";
+                    break;
+            }
+
+            document.getElementById("p").innerHTML = "Letra: " +chars[n].caracter;
+        }
+
+        function trocaLetra ()
+        {
+            sorteiaLetra();
+            erase();
+            exibeLetra();
+        }
+
+        function getRandomInt (min, max)
+        {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+    </script>
+</head>
 <body onload="init()">
     <p id="p">0</p>
     <i id="i">0</i>
@@ -164,18 +333,10 @@
     <span id="span">dragging: </span>
 
     <center>
-        <div class="colorSelect" id="green" onclick="color(this)"></div>
-        <div class="colorSelect" id="blue" onclick="color(this)"></div>
-        <div class="colorSelect" id="red" onclick="color(this)"></div>
-        <div class="colorSelect" id="yellow" onclick="color(this)"></div>
-        <div class="colorSelect" id="orange" onclick="color(this)"></div>
-        <div class="colorSelect" id="black" onclick="color(this)"></div>
-        <!-- <div style="">Eraser</div> -->
-        <div class="colorSelect" style="width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
         <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
 
         <div id="canvasContainer">
-            <canvas id="can" width="400" height="400" style="border:2px solid #c3c3c3;">
+            <canvas id="can" width="400" height="360" style="border:2px solid #c3c3c3;">
                 Your browser does not support the canvas element.
             </canvas>
         </div>
@@ -183,6 +344,6 @@
         <input type="button" value="save" id="btn" size="30" onclick="save()">
         <input type="button" value="clear" id="clr" size="23" onclick="erase()">
         <input type="button" value="show" id="show" size="23" onclick="exibeLetra()">
+        <input type="button" value="changeLetter" id="changeLetter" size="23" onclick="trocaLetra()">
     </center>
-    </body>
-</html>
+</body></html>

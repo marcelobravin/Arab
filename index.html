@@ -11,7 +11,6 @@
       gtag('config', 'UA-171185330-2');
     </script>
     <!-- controle de volume -->
-    <!-- drag and draw -->
     <!-- sentence generator -->
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,23 +19,36 @@
     <style type="text/css">
         th {
             text-transform: uppercase;
-            font-size: 12px;
+            /*font-size: 12px;*/
             font-weight: normal;
             color: white;
             background: #808000;
         }
         td {
             text-align: center;
-            font-size: 26px;
+            font-size: 30px;
             width: 80px;
         }
-        td.portugues {
-            font-size: 14px
-        }
+
+
+/*a,p,*/
+
+
         body {
             margin: 0 auto;
             text-align: center;
-            background: antiquewhite;
+            background: transparent;
+            /*border-image: url('assets/arc.png') 30 / 19px round;*/
+        }
+        html {
+            border: 60px solid;
+            height: fit-content !important;
+            background-color: antiquewhite;
+
+            /*border-image: url("assets/arc.png") 188 109 / 51px 35px / 0rem round;*/
+            border-image: url("assets/arc.png") 203 173 / 90px 79px / 0rem round;
+            /*border-image: url("assets/arc.png") 140 262 / 65px 86px / 0px 0px round;*/
+            /*border-image: url("assets/arc.png") 163 163 / 70px 59px / 0rem round;*/
         }
         table {
             margin: 10px 30px 0 30px;
@@ -113,6 +125,7 @@
         }
 
         .letra { color: blue; }
+        a:hover,
         .letra:hover { text-decoration: underline }
 
         [data-egoista='true'] {
@@ -156,42 +169,42 @@
         }
 
         .tooltip {
-          position: relative;
-          /*display: inline-block;*/
-          margin: 0 auto;
+            position: relative;
+            /*display: inline-block;*/
+            margin: 0 auto;
         }
 
         .tooltip .tooltiptext {
-          /*visibility: hidden;*/
-          width: 140px;
-          background-color: #555;
-          color: #fff;
-          text-align: center;
-          border-radius: 6px;
-          padding: 5px;
-          position: absolute;
-          z-index: 1;
-          bottom: 6px;
-          left: 50%;
-          margin-left: -75px;
-          opacity: 0;
-          transition: opacity 0.3s;
+            /*visibility: hidden;*/
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 6px;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .tooltip .tooltiptext::after {
-          content: "";
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          margin-left: -5px;
-          border-width: 5px;
-          border-style: solid;
-          border-color: #555 transparent transparent transparent;
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
         }
 
         .tooltip .tooltiptext.visible {
-          /*visibility: visible;*/
-          opacity: 1;
+            /*visibility: visible;*/
+            opacity: 1;
         }
 
 
@@ -199,7 +212,7 @@
             width: 70px;
             height: 46px;
             vertical-align: middle;
-         }
+        }
 
         li {
             margin: 20px 0;
@@ -212,6 +225,34 @@
         a {
             text-decoration: none
         }
+
+        td.copy {
+            font-size: 22px;
+        }
+        th,
+        body,
+        td.portugues {
+            font-size: 14px;
+            font-family: arial;
+        }
+/*
+        @media (min-width: 320px) and (max-width: 480px) {
+          td.copy {
+              font-size: 42px !important;
+          }
+
+          th,
+          body,
+          td.portugues {
+              font-size: 18px !important;
+          }
+
+          a {
+              color: red;
+              font-size: 10px;
+          }
+        }
+*/
     </style>
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script src="assets/jquery.min.js"></script>
@@ -296,7 +337,13 @@
 <body>
     <p>
         <a href="caracteres.html">Memorização de Caracteres</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
         <a href="vocabulario.html">Treino de Vocabulário</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
         <a href="desenho.html">Treino de Escrita</a>
     </p>
     <span id="zoomedChar"></span>

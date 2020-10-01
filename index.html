@@ -47,6 +47,7 @@
 
             /*border-image: url("assets/arc.png") 188 109 / 51px 35px / 0rem round;*/
             border-image: url("assets/arc.png") 203 173 / 90px 79px / 0rem round;
+            /*border-image: url("assets/arc.png") 178 166 / 90px 79px / 0rem round;*/
             /*border-image: url("assets/arc.png") 140 262 / 65px 86px / 0px 0px round;*/
             /*border-image: url("assets/arc.png") 163 163 / 70px 59px / 0rem round;*/
         }
@@ -229,15 +230,40 @@
         td.copy {
             font-size: 22px;
         }
+
         th,
         body,
         td.portugues {
-            font-size: 14px;
+            /*font-size: 14px;*/
             font-family: arial;
+        }
+
+        td.portugues,
+        th {
+            font-size: 12px;
+        }
+
+        p a {
+            /*color: red;*/
+            font-size: 16px;
+        }
+
+        @media (max-width: 1024px)
+        {
+            p a {
+                /*color: cyan;*/
+                /*font-size: 14px;*/
+            }
+            /*table { width: 90% }*/
+            /*td:nth-child(1) { width: auto; }
+            td:nth-child(2) { width: auto; }
+            td:nth-child(3) { width: auto; }*/
         }
 /*
         @media (min-width: 320px) and (max-width: 480px) {
-          td.copy {
+        }
+*/
+          /*td.copy {
               font-size: 42px !important;
           }
 
@@ -250,9 +276,7 @@
           a {
               color: red;
               font-size: 10px;
-          }
-        }
-*/
+          }*/
     </style>
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script src="assets/jquery.min.js"></script>
@@ -335,6 +359,7 @@
 </head>
 
 <body>
+
     <p>
         <a href="caracteres.html">Memorização de Caracteres</a>
         &nbsp;

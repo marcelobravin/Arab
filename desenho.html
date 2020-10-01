@@ -91,75 +91,79 @@
         var letra = "ج";
 
         function init() {
-            sorteiaLetra();
+
             canvas = document.getElementById('can');
             ctx = canvas.getContext("2d");
+            sorteiaLetra();
+            exibeLetra();
+            exibeGuia();
+
             w = canvas.width;
             h = canvas.height;
-/*
-el.addEventListener("touchstart", handleStart, false);
-el.addEventListener("touchend", handleEnd, false);
-el.addEventListener("touchcancel", handleCancel, false);
-el.addEventListener("touchleave", handleEnd, false);
-el.addEventListener("touchmove", handleMove, false);
-*/
-canvas.addEventListener("touchmove", function (e) {
-    // console.log("touchmove");
-    // findxy('move', e)
-    handleMove(e);
-}, false);
-canvas.addEventListener("touchstart", function (e) {
-    // console.log("touchstart");
-    document.getElementById("span").innerHTML = "dragging: true";
-    isDown = true;
-    findxy('down', e)
-}, false);
 
-/*
-document.addEventListener("touchcancel", function (e) {
-    console.log("touchcancel");
-    document.getElementById("span").innerHTML = "dragging: false";
-    isDown = false;
-    findxy('up', e)
-}, false);
-canvas.addEventListener("touchleave", function (e) {
-    console.log("touchleave");
-    findxy('out', e)
-}, false);
-*/
-function handleMove(evt) {
-  evt.preventDefault();
-  var touches = evt.changedTouches;
-  // console.log(touches);
+            /*
+            el.addEventListener("touchstart", handleStart, false);
+            el.addEventListener("touchend", handleEnd, false);
+            el.addEventListener("touchcancel", handleCancel, false);
+            el.addEventListener("touchleave", handleEnd, false);
+            el.addEventListener("touchmove", handleMove, false);
+            */
+            canvas.addEventListener("touchmove", function (e) {
+                // console.log("touchmove");
+                // findxy('move', e)
+                handleMove(e);
+            }, false);
+            canvas.addEventListener("touchstart", function (e) {
+                // console.log("touchstart");
+                document.getElementById("span").innerHTML = "dragging: true";
+                isDown = true;
+                findxy('down', e)
+            }, false);
 
-  for (var i=0; i < touches.length; i++) {
-    // var idx = ongoingTouchIndexById(touches[i].identifier);
-    var idx = touches[i].identifier;
+            /*
+            document.addEventListener("touchcancel", function (e) {
+                console.log("touchcancel");
+                document.getElementById("span").innerHTML = "dragging: false";
+                isDown = false;
+                findxy('up', e)
+            }, false);
+            canvas.addEventListener("touchleave", function (e) {
+                console.log("touchleave");
+                findxy('out', e)
+            }, false);
+            */
+            function handleMove(evt) {
+                evt.preventDefault();
+                var touches = evt.changedTouches;
+                // console.log(touches);
 
-    if(idx >= 0) {
-      // log("continuing touch "+idx);
-      ctx.beginPath();
-      // log("ctx.moveTo("+ongoingTouches[idx].pageX+", "+ongoingTouches[idx].pageY+");");
+                for (var i=0; i < touches.length; i++) {
+                    // var idx = ongoingTouchIndexById(touches[i].identifier);
+                    var idx = touches[i].identifier;
 
-      // canvas.offsetLeft;
-      // canvas.offsetTop;
+                    if(idx >= 0) {
+                        // log("continuing touch "+idx);
+                        ctx.beginPath();
+                        // log("ctx.moveTo("+ongoingTouches[idx].pageX+", "+ongoingTouches[idx].pageY+");");
 
-      prevX = currX;
-      prevY = currY;
-      currX = touches[i].pageX-canvas.offsetLeft;
-      currY = touches[i].pageY-canvas.offsetTop;
+                        // canvas.offsetLeft;
+                        // canvas.offsetTop;
 
-      // ctx.moveTo(prevX, prevY);
-      // ctx.lineTo(currX, currY);
-      // ctx.strokeStyle = "red";
-      // ctx.stroke();
-      draw("red");
+                        prevX = currX;
+                        prevY = currY;
+                        currX = touches[i].pageX-canvas.offsetLeft;
+                        currY = touches[i].pageY-canvas.offsetTop;
 
-      // ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
-    }
-  }
-}
+                        // ctx.moveTo(prevX, prevY);
+                        // ctx.lineTo(currX, currY);
+                        // ctx.strokeStyle = "red";
+                        // ctx.stroke();
+                        draw("red");
 
+                        // ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
+                    }
+                }
+            }
 
             canvas.addEventListener("mousemove", function (e) {
                 findxy('move', e)
@@ -198,6 +202,8 @@ function handleMove(evt) {
 
         function erase() {
             ctx.clearRect(0, 0, w, h);
+            exibeGuia();
+            // exibirLetra = false;
             document.getElementById("canvasimg").style.display = "none";
         }
 
@@ -254,15 +260,19 @@ function handleMove(evt) {
             }
         }
 
-        function exibeLetra ()
+        var exibirLetra = false;
+        function exibeLetra (alterar=false)
         {
+            if (alterar== true) {
+                exibirLetra = !exibirLetra;
+            }
+
             ctx.font      = "320px Arial";
             ctx.fillStyle = "#000";
             // ctx.fillText(letra, 60, 280);
 
             ctx.textAlign = "center";
             ctx.textBaseline = "Alphabetic";
-            exibeGuia();
             letra = letra.replaceAll('ـ', '');
             ctx.fillText(letra,200, 280);
         }
@@ -315,7 +325,11 @@ function handleMove(evt) {
         {
             sorteiaLetra();
             erase();
-            exibeLetra();
+            exibeGuia();
+
+            if (exibirLetra) {
+                exibeLetra();
+            }
         }
 
         function getRandomInt (min, max)
@@ -327,6 +341,10 @@ function handleMove(evt) {
     </script>
 </head>
 <body onload="init()">
+    <p>
+        <a href="index.html">Voltar para home</a>
+    </p>
+
     <p id="p">0</p>
     <i id="i">0</i>
     <br>
@@ -335,15 +353,17 @@ function handleMove(evt) {
     <center>
         <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
 
+        <label>
+            Show<input type="checkbox" value="show" size="23" onclick="exibeLetra(true)">
+        </label>
         <div id="canvasContainer">
             <canvas id="can" width="400" height="360" style="border:2px solid #c3c3c3;">
                 Your browser does not support the canvas element.
             </canvas>
         </div>
 
-        <input type="button" value="save" id="btn" size="30" onclick="save()">
-        <input type="button" value="clear" id="clr" size="23" onclick="erase()">
-        <input type="button" value="show" id="show" size="23" onclick="exibeLetra()">
-        <input type="button" value="changeLetter" id="changeLetter" size="23" onclick="trocaLetra()">
+        <input type="button" value="save" size="30" onclick="save()">
+        <input type="button" value="clear" size="23" onclick="erase()">
+        <input type="button" value="changeLetter" size="23" onclick="trocaLetra()">
     </center>
 </body></html>

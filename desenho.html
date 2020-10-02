@@ -43,10 +43,25 @@
         #orange { background:orange }
         #black  { background:black }
 
-        body    {
-            border: 30px solid;
-            border-image: url('assets/border-diamonds.png') 30 / 19px round;
+        html {
+            /*height: fit-content !important;*/
         }
+        body    {
+            /*border: 30px solid;*/
+            /*border-image: url('assets/border-diamonds.png') 30 / 19px round;*/
+
+            /*border: 60px solid;*/
+            /*border-image: url("assets/arc.png") 178 166 / 90px 79px / 0rem round;*/
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        td:nth-child(2) { font-weight: bold; }
+
     </style>
     <!-- <script src="assets/jquery.min.js"></script> -->
     <script>
@@ -138,32 +153,16 @@
             function handleMove(evt) {
                 evt.preventDefault();
                 var touches = evt.changedTouches;
-                // console.log(touches);
 
                 for (var i=0; i < touches.length; i++) {
-                    // var idx = ongoingTouchIndexById(touches[i].identifier);
-                    var idx = touches[i].identifier;
 
                     if(idx >= 0) {
-                        // log("continuing touch "+idx);
                         ctx.beginPath();
-                        // log("ctx.moveTo("+ongoingTouches[idx].pageX+", "+ongoingTouches[idx].pageY+");");
-
-                        // canvas.offsetLeft;
-                        // canvas.offsetTop;
-
                         prevX = currX;
                         prevY = currY;
-                        currX = touches[i].pageX-canvas.offsetLeft;
-                        currY = touches[i].pageY-canvas.offsetTop;
-
-                        // ctx.moveTo(prevX, prevY);
-                        // ctx.lineTo(currX, currY);
-                        // ctx.strokeStyle = "red";
-                        // ctx.stroke();
+                        currX = touches[i].pageX - canvas.offsetLeft;
+                        currY = touches[i].pageY - canvas.offsetTop;
                         draw("red");
-
-                        // ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
                     }
                 }
             }
@@ -172,12 +171,10 @@
                 findxy('move', e)
             }, false);
             canvas.addEventListener("mousedown", function (e) {
-                document.getElementById("span").innerHTML = "dragging: true";
                 isDown = true;
                 findxy('down', e)
             }, false);
             document.addEventListener("mouseup", function (e) {
-                document.getElementById("span").innerHTML = "dragging: false";
                 isDown = false;
                 findxy('up', e)
             }, false);
@@ -196,7 +193,7 @@
             ctx.beginPath();
             ctx.moveTo(prevX, prevY);
             ctx.lineTo(currX, currY);
-            ctx.strokeStyle = color;
+            ctx.strokeStyle = '#392bc0';
             ctx.lineWidth   = pencilWidth;
             ctx.lineCap     = 'round';
             ctx.stroke();
@@ -231,19 +228,10 @@
                 dot_flag = true;
                 if (dot_flag) {
                     ctx.beginPath();
-                    // ctx.fillRect(currX, currY, 2, 2);
-
+                    ctx.strokeStyle = '#392bc0';
                     ctx.arc(currX, currY, 2, 0, 2 * Math.PI, false);
-                    // ctx.fillStyle = 'green';
-                    // context.fill();
-                    // context.lineWidth = 5;
-
-
                     ctx.fill();
-                    // ctx.lineWidth = 5;
-                    // ctx.strokeStyle = '#003300';
                     ctx.stroke()
-
 
                     ctx.closePath();
                     dot_flag = false;
@@ -294,7 +282,7 @@
             ctx.lineTo(400, 240);
             ctx.stroke();
             ctx.closePath();
-        }
+    }
 
         function sorteiaLetra ()
         {
@@ -308,20 +296,20 @@
             let position = getRandomInt (0, 4);
             switch (position) {
                 case 0: letra = chars[n].isolada;
-                    document.getElementById("i").innerHTML = "Posição: isolada";
+                    document.getElementById("i").innerHTML = "isolada";
                     break;
                 case 1: letra = chars[n].comeco;
-                    document.getElementById("i").innerHTML = "Posição: comeco";
+                    document.getElementById("i").innerHTML = "comeco";
                     break;
                 case 2: letra = chars[n].meio;
-                    document.getElementById("i").innerHTML = "Posição: meio";
+                    document.getElementById("i").innerHTML = "meio";
                     break;
                 case 3: letra = chars[n].fim;
-                    document.getElementById("i").innerHTML = "Posição: fim";
+                    document.getElementById("i").innerHTML = "fim";
                     break;
             }
 
-            document.getElementById("p").innerHTML = "Letra: " +chars[n].caracter;
+            document.getElementById("p").innerHTML = chars[n].caracter;
         }
 
         function trocaLetra ()
@@ -348,25 +336,32 @@
         <a href="index.html">Voltar para home</a>
     </p>
 
-    <p id="p">0</p>
-    <i id="i">0</i>
-    <br>
-    <span id="span">dragging: </span>
+    <table>
+        <tr>
+            <td>Letra</td>
+            <td><span id="p">0</span></td>
+            <!-- <td><span id="span">dragging: </span></td> -->
+        </tr>
+        <tr>
+            <td>Posição</td>
+            <td><span id="i">0</span></td>
+            <!-- <td><span id="span">dragging: </span></td> -->
+        </tr>
+    </table>
 
-    <center>
-        <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
 
-        <label>
-            Show<input type="checkbox" value="show" size="23" onclick="exibeLetra(true)">
-        </label>
-        <div id="canvasContainer">
-            <canvas id="can" width="400" height="360" style="border:2px solid #c3c3c3;">
-                Your browser does not support the canvas element.
-            </canvas>
-        </div>
+    <label>
+        Show<input type="checkbox" value="show" size="23" onclick="exibeLetra(true)">
+    </label>
+    <div id="canvasContainer">
+        <canvas id="can" width="400" height="360" style="border:2px solid #c3c3c3;">
+            Your browser does not support the canvas element.
+        </canvas>
+    </div>
 
-        <input type="button" value="save" size="30" onclick="save()">
-        <input type="button" value="clear" size="23" onclick="erase()">
-        <input type="button" value="changeLetter" size="23" onclick="trocaLetra()">
-    </center>
+    <input type="button" value="save" size="30" onclick="save()">
+    <input type="button" value="clear" size="23" onclick="erase()">
+    <input type="button" value="changeLetter" size="23" onclick="trocaLetra()">
+
 </body></html>

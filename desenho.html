@@ -12,7 +12,7 @@
     </script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Memorização Alfabeto Árabe</title>
+    <title>Caligrafia Árabe</title>
 
     <link rel="shortcut icon" href="assets/iconfinder_Arab League_15797.png" />
     <style type="text/css">
@@ -133,7 +133,7 @@
             }, false);
             canvas.addEventListener("touchstart", function (e) {
                 // console.log("touchstart");
-                document.getElementById("span").innerHTML = "dragging: true";
+                // document.getElementById("span").innerHTML = "dragging: true";
                 isDown = true;
                 findxy('down', e)
             }, false);
@@ -156,14 +156,12 @@
 
                 for (var i=0; i < touches.length; i++) {
 
-                    if(idx >= 0) {
-                        ctx.beginPath();
-                        prevX = currX;
-                        prevY = currY;
-                        currX = touches[i].pageX - canvas.offsetLeft;
-                        currY = touches[i].pageY - canvas.offsetTop;
-                        draw("red");
-                    }
+                    ctx.beginPath();
+                    prevX = currX;
+                    prevY = currY;
+                    currX = touches[i].pageX - canvas.offsetLeft;
+                    currY = touches[i].pageY - canvas.offsetTop;
+                    draw("red");
                 }
             }
 
@@ -193,7 +191,7 @@
             ctx.beginPath();
             ctx.moveTo(prevX, prevY);
             ctx.lineTo(currX, currY);
-            ctx.strokeStyle = '#392bc0';
+            ctx.strokeStyle = color;
             ctx.lineWidth   = pencilWidth;
             ctx.lineCap     = 'round';
             ctx.stroke();

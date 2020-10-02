@@ -28,6 +28,12 @@
             font-size: 40px;
             text-align: center;
             text-shadow: 2px 2px 4px grey;
+
+            /*width: 100%;*/
+            /*height: 100%;*/
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            position: relative;
         }
 
 
@@ -37,10 +43,17 @@
             height: 100%;
             box-sizing: border-box;
 
-            background-color: maroon;
 
-            border-image: url("assets/arcB.png") 203 173 / 90px 79px / 0rem round;
+            background-color: maroon;
+            /*background-color: maroon;*/
+            /*border-image: url("assets/arcB.png") 203 173 / 90px 79px / 0rem round;*/
         }
+
+
+/*        label:hover {
+          transform: rotateY(180deg);
+        }
+*/
     </style>
     <script src="assets/jquery.min.js"></script>
     <script>
@@ -81,6 +94,8 @@
             ];
 
             $("body").on('click', '[type=radio]', function(){
+                $(this).parent().css("transform", "rotateY(180deg)");
+
                 if ( verificarAcerto( $(this).val(), chars ) ) {
                     $("#acertos").text( Number($("#acertos").text()) +1 );
                     audios['acerto'].play();
@@ -153,6 +168,13 @@
                 // x += chars[alternativas[b]].meio;
                 // x += "<br>";
                 // x += chars[alternativas[b]].fim;
+
+                if (n==a) {
+                    x += "<div class='card__face--back card__face correct'>-!-</div>";
+                } else {
+                    x += "<div class='card__face--back card__face'>XXX</div>";
+                }
+
                 x += "</label>";
             });
 
@@ -215,4 +237,37 @@
         <label></label>
         <label></label>
     </div>
+
+    <style type="text/css">
+
+        .card.is-flipped {
+          transform: rotateY(180deg);
+        }
+
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+          /*-webkit-backface-visibility: hidden;*/
+          /*backface-visibility: hidden;*/
+        }
+
+        .card__face--back {
+          background: red;
+          transform: rotateY(180deg);
+        }
+
+        .card__face--back.correct {
+          background: lime;
+          /*transform: rotateY(180deg);*/
+        }
+
+    </style>
+    <script type="text/javascript">
+        var card = document.querySelector('.card');
+        card.addEventListener( 'click', function() {
+          card.classList.toggle('is-flipped');
+        });
+    </script>
 </body></html>

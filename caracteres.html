@@ -20,7 +20,7 @@
         label {
             cursor: pointer;
             margin: 40px 10%;
-            border: 1px solid red;
+            border: 1px solid silver;
             width: 110px;
             display: inline-block;
             height: 120px;
@@ -36,6 +36,9 @@
             position: relative;
         }
 
+        label:hover {
+            border: 1px solid black;
+        }
 
         html {
             border: 2px solid;
@@ -43,11 +46,45 @@
             height: 100%;
             box-sizing: border-box;
 
+          /*background: url(assets/vintage-invitation-card-template-frame-600w-331376474.png) top center no-repeat;*/
 
             background-color: maroon;
             /*background-color: maroon;*/
-            /*border-image: url("assets/arcB.png") 203 173 / 90px 79px / 0rem round;*/
+            /*border-image: url("assets/arc.png") 203 173 / 90px 79px / 0rem round;*/
         }
+
+
+
+        label,
+        .card__face { border-radius: 10px }
+
+        .card.is-flipped {
+          transform: rotateY(180deg);
+        }
+
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+          /*-webkit-backface-visibility: hidden;*/
+          /*backface-visibility: hidden;*/
+        }
+
+        .card__face--back {
+          background: red;
+          transform: rotateY(180deg);
+          border: 1px solid black;
+          line-height: 100px;
+          top: -1px;
+          left: -1px;
+        }
+
+        .card__face--back.correct {
+          background: lime;
+          /*transform: rotateY(180deg);*/
+        }
+
 
 
 /*        label:hover {
@@ -172,7 +209,7 @@
                 if (n==a) {
                     x += "<div class='card__face--back card__face correct'>-!-</div>";
                 } else {
-                    x += "<div class='card__face--back card__face'>XXX</div>";
+                    x += "<div class='card__face--back card__face'>^_^'</div>";
                 }
 
                 x += "</label>";
@@ -238,36 +275,12 @@
         <label></label>
     </div>
 
-    <style type="text/css">
-
-        .card.is-flipped {
-          transform: rotateY(180deg);
-        }
-
-        .card__face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0px;
-          /*-webkit-backface-visibility: hidden;*/
-          /*backface-visibility: hidden;*/
-        }
-
-        .card__face--back {
-          background: red;
-          transform: rotateY(180deg);
-        }
-
-        .card__face--back.correct {
-          background: lime;
-          /*transform: rotateY(180deg);*/
-        }
-
+<!--
     </style>
     <script type="text/javascript">
         var card = document.querySelector('.card');
         card.addEventListener( 'click', function() {
           card.classList.toggle('is-flipped');
         });
-    </script>
+    </script> -->
 </body></html>
